@@ -1,12 +1,93 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "小0回收"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/home/home",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "小0回收",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/change/change",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "兑换处",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/recycle/recycle",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "回收",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+  
+  "tabBar": {
+     "selectedColor":"#55aa00",
+      "list": [{
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "static/source/home.png",
+        "selectedIconPath": "static/source/_home.png"
+      },
+      {
+      "pagePath": "pages/changeshop/changeshop",
+      "text": "兑换",
+      "iconPath": "static/source/change.png",
+      "selectedIconPath": "static/source/_change.png"
+    },
+    {
+      "pagePath": "pages/recycle/recycle",
+      "text": "回收",
+      "iconPath": "static/source/recycle.png",
+      "selectedIconPath": "static/source/_recycle.png"
+    },
+    {
+      "pagePath": "pages/order/order",
+      "text": "订单",
+      "iconPath": "static/source/order.png",
+      "selectedIconPath": "static/source/_order.png"
+    },
+    {
+      "pagePath": "pages/mine/mine",
+      "text": "我的",
+      "iconPath": "static/source/mine.png",
+      "selectedIconPath": "static/source/_mine.png"
+    }
+    ]
+    },
+  
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
