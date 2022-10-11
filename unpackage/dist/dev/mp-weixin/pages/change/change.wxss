@@ -1,0 +1,86 @@
+
+.container03 {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.scroll-H {
+  margin-left: 20rpx;
+  border-radius: 10rpx;
+}
+image {
+  width: 300rpx;
+  border-radius: 10rpx;
+}
+scroll-view {
+  padding-top: 50rpx;
+}
+.search-result {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+.search-result-text {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+.example-body {
+
+  display: block;
+
+  padding: 0px;
+}
+.uni-mt-10 {
+  margin-top: 10px;
+}
+.advertise {
+  width: 100%;
+}
+.advertise image {
+  /* margin-left:100rpx; */
+  width: 100%;
+}
+.cate-box {
+  height: 100%;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+.cate-title {
+  position: relative;
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 30rpx 0 55rpx;
+  text-align: center;
+  color: #AB956D;
+  font-size: 28rpx;
+}
+.cate-title::before {
+  position: absolute;
+  left: 130rpx;
+  top: 43rpx;
+  content: '';
+  width: 70rpx;
+  height: 4rpx;
+  background: #AB956D;
+}
+.cate-title::after {
+  position: absolute;
+  right: 130rpx;
+  top: 43rpx;
+  content: '';
+  width: 70rpx;
+  height: 4rpx;
+  background: #AB956D;
+}
+.demo-uni-col {
+		height: 150px;
+    margin: 20rpx 20rpx 20rpx 20rpx;
+      padding:10rpx;
+		border-radius: 5px;
+}
+.light {
+	background-color: #e5e9f2;
+  margin-bottom: 10rpx;
+}
+

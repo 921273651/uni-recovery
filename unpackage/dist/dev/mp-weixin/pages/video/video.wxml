@@ -1,0 +1,1 @@
+<view class="video-page"><view class="video"><cate-list vue-id="cc049370-1" CatesList="{{videoList}}" bind:__l="__l"></cate-list></view></view>

@@ -1,29 +1,25 @@
 {
+  "easycom": {
+  		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+  	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
+	 {
 			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "小0回收"
 			}
 		}
 	    ,{
-            "path" : "pages/home/home",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "小0回收",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/change/change",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "兑换处",
+              
+                "navigationBarTitleText": "兑换好礼",
                 "enablePullDownRefresh": false
             }
             
         }
+        
         ,{
             "path" : "pages/recycle/recycle",
             "style" :                                                                                    
@@ -49,8 +45,41 @@
                 "navigationBarTitleText": "我的",
                 "enablePullDownRefresh": false
             }
+        }
+       
+        ,{
+            "path" : "pages/video/video",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "视频专区",
+                "enablePullDownRefresh": false
+            }
             
         }
+        ,{
+            "path" : "pages/details/details",
+            "style" :                                                                                    
+            {
+             "navigationStyle":"custom",
+                "navigationBarTitleText": "商品详情",
+                "enablePullDownRefresh": false,
+                "app-plus":{
+                  "titleNView":{
+                    "type":"transparent",
+                    "buttons":[
+                      {
+                        "type":"menu"
+                      },
+                      {
+                        "type":"share"
+                      }
+                        
+                      ]
+                      
+                    }
+                  }
+                }
+            }
     ],
   
   "tabBar": {
@@ -62,7 +91,7 @@
         "selectedIconPath": "static/source/_home.png"
       },
       {
-      "pagePath": "pages/changeshop/changeshop",
+      "pagePath": "pages/change/change",
       "text": "兑换",
       "iconPath": "static/source/change.png",
       "selectedIconPath": "static/source/_change.png"
@@ -89,6 +118,7 @@
     },
   
 	"globalStyle": {
+    // "navigationStyle": "custom", title消失术
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",

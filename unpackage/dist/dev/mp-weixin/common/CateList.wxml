@@ -1,0 +1,1 @@
+<view class="cateList"><view class="goods-wrap _ul"><block wx:for="{{CatesList}}" wx:for-item="item" wx:for-index="index"><view class="good-item _li"><image class="good-img" src="{{item.Url}}" object-fit="cover"></image><view class="_h5">{{item.cateName}}</view><view class="_h5">{{item.catePrice}}</view></view></block></view></view>

@@ -1,0 +1,34 @@
+
+.cate-box.data-v-584a444e{
+  display: flex;
+  flex-wrap: warp;
+}
+.cates-item.data-v-584a444e{
+ 
+  width:375rpx;
+  padding-bottom: 20rpx;
+}
+.cates-img.data-v-584a444e{
+  width: 100%;
+  height: 375rpx;
+}
+.cates-content.data-v-584a444e{
+  text-align: center;
+}
+.cates-name.data-v-584a444e{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  color: #3333;
+  word-break: break-all;
+  padding: 6rpx 20rpx;
+}
+.cates-price.data-v-584a444e{
+  /* 文字上横线 */
+  /* text-decoration: line-through; */
+  font-size: 24rpx;
+  color: 999999;
+}
+

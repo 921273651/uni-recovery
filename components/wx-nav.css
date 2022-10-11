@@ -1,0 +1,13 @@
+/* 1、在app.vue中引用
+   2、class中应用组件名
+ */
+
+.wx-nav{
+  text-align:center;
+  height: 200rpx;
+  width: 100%;
+  line-height: 200rpx;
+  display: flex;
+  align-items: center;
+  background-color: #32CD32;
+}
