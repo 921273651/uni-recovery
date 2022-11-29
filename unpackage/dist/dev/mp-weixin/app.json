@@ -10,7 +10,8 @@
     "pages/shop-car/shop-car",
     "pages/commit_order/commit_order",
     "pages/address/address",
-    "pages/my_add_path/my_add_path"
+    "pages/my_add_path/my_add_path",
+    "pages/activity/activity"
   ],
   "subPackages": [],
   "window": {
@@ -54,5 +55,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

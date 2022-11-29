@@ -106,6 +106,17 @@
                       success: function (res) {
                           if (res.confirm) {
                               console.log('用户点击确定')
+                              uni.request({
+                                url:'http://localhost:3000/api/address/getAddress',
+                                success:(res) =>{
+                                  console.log(res,'订单接口返回的信息');
+                                  if(res.data.code==2000){
+                                   this.addressList=res.data.data;
+                                  
+                                    console.log(res.data.data,'订单列表')
+                                  }
+                                }
+                              })
                               uni.navigateTo({
                                 url:'/pages/commit_order/commit_order'
                               })

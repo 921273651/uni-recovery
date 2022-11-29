@@ -1,4 +1,5 @@
 <template>
+  <view>
   <!-- 发货确定订单 -->
   <view class="page_commitOrder">
     <!-- 顶部信息页开始 -->
@@ -63,6 +64,8 @@
 
     </view>
   </view>
+  </view>
+  
 </template>
 
 <script>

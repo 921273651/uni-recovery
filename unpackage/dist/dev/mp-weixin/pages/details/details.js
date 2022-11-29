@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Card = function Card() {__webpack_require__.e(/*! require.ensure | common/Card */ "common/Card").then((function () {return resolve(__webpack_require__(/*! @/common/Card.vue */ 257));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CateList = function CateList() {__webpack_require__.e(/*! require.ensure | common/CateList */ "common/CateList").then((function () {return resolve(__webpack_require__(/*! @/common/CateList.vue */ 250));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Card = function Card() {__webpack_require__.e(/*! require.ensure | common/Card */ "common/Card").then((function () {return resolve(__webpack_require__(/*! @/common/Card.vue */ 263));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CateList = function CateList() {__webpack_require__.e(/*! require.ensure | common/CateList */ "common/CateList").then((function () {return resolve(__webpack_require__(/*! @/common/CateList.vue */ 256));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -235,9 +235,20 @@ __webpack_require__.r(__webpack_exports__);
       uni.showModal({
         title: '提示',
         content: '确认兑换 ？',
-        success: function success(res) {
+        success: function success(res) {var _this2 = this;
           if (res.confirm) {
             console.log('用户点击确定');
+            uni.request({
+              url: 'http://localhost:3000/api/address/getAddress',
+              success: function success(res) {
+                console.log(res, '订单接口返回的信息');
+                if (res.data.code == 2000) {
+                  _this2.addressList = res.data.data;
+
+                  console.log(res.data.data, '订单列表');
+                }
+              } });
+
             uni.navigateTo({
               url: '/pages/commit_order/commit_order' });
 
