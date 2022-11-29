@@ -13,6 +13,7 @@ let planRouter = require('./routes/plan')
 let costRouter = require('./routes/cost')
 let testRouter = require('./routes/test')
 let goodsRouter = require('./routes/goods')
+let addressRouter=require('./routes/address.js')
 // 实例化
 let app = express();
 app.listen(3000);
@@ -59,5 +60,5 @@ app.use('/api/plan', planRouter);
 app.use('/api/cost', costRouter);
 app.use('/api/test', testRouter);
 app.use('/api/goods', goodsRouter);
-
+app.use('/api/address',addressRouter);
 module.exports = app;

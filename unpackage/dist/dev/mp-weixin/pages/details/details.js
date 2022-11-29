@@ -180,6 +180,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
@@ -213,8 +225,29 @@ __webpack_require__.r(__webpack_exports__);
           }
         } });
 
-    } },
+    },
+    goBack: function goBack() {
+      uni.navigateBack({
+        delta: 1 });
 
+    },
+    btnBuy: function btnBuy() {
+      uni.showModal({
+        title: '提示',
+        content: '确认兑换 ？',
+        success: function success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+            uni.navigateTo({
+              url: '/pages/commit_order/commit_order' });
+
+          } else {
+            console.log('用户点击取消');
+          }
+
+        } });
+
+    } },
 
   // 引入自定义组件需在components底下加入
   components: {

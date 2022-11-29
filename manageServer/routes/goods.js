@@ -17,5 +17,5 @@ router.get('/getCatesList', (req, res) => {
     })
   })
   
-  console.log('test接口就绪');
+  console.log('goods接口就绪');
 module.exports = router;

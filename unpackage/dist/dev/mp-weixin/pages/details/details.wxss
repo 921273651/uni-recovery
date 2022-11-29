@@ -26,12 +26,45 @@
 /* 文章场景相关 */
 swiper {
   width: 100%;
-  height: 700rpx;
+  height: 580rpx;
+}
+.wx-nav {
+  height: 60px;
 }
 .details-goods {
   text-align: center;
   font-weight: bold;
-  font-size: 18rpx;
+  font-size: 16px;
   padding: 10rpx 0;
+}
+.details-goods .goods_content {
+  font-size: 12px;
+}
+.bottom-nav {
+  height: 100rpx;
+  background: #fff;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.bottom-nav .add-cart {
+  flex: 1;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 36rpx;
+  background: #ffcc00;
+  padding: 10rpx;
+  border-radius: 20px;
+  color: #FFFFFF;
+}
+.bottom-nav .btn-buy {
+  flex: 1;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 36rpx;
+  background: #FE7302;
+  color: #FFFFFF;
 }
 

@@ -132,9 +132,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+<<<<<<< HEAD
 
 var _CateList = _interopRequireDefault(__webpack_require__(/*! ./CateList.vue */ 250));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
+=======
+var _CateList = _interopRequireDefault(__webpack_require__(/*! ./CateList.vue */ 250));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+>>>>>>> dev
 //
 //
 //

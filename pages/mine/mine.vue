@@ -40,13 +40,13 @@
  		</view>
  		
  		<view class="cu-item arrow" @click="address">
- 			<navigator class="content" url="/pages/coupons/index" hover-class="none">
+ 			<navigator class="content" url="/pages/address/address" hover-class="none">
  				<text class="cuIcon-usefull text-orange"></text>
  				<text class="text-grey">收货地址</text>
  			</navigator>
  		</view>
  		<view class="cu-item arrow">
- 			<navigator class="content" url="/pages/recruit/recruit" hover-class="none">
+ 			<navigator class="content" url="/pages/order/order" hover-class="none">
  				<text class="cuIcon-light text-orange"></text>
  				<text class="text-grey">我的订单</text>
  			</navigator>
@@ -111,20 +111,7 @@
 				phoneNumber:'123456789'
 			})
 		},
-		address:function(){
-			uni.chooseAddress({
-			  success (res) {
-			    console.log(res.userName)
-			    console.log(res.postalCode)
-			    console.log(res.provinceName)
-			    console.log(res.cityName)
-			    console.log(res.countyName)
-			    console.log(res.detailInfo)
-			    console.log(res.nationalCode)
-			    console.log(res.telNumber)
-			  }
-			})
-		},
+		
 		goLogin(){
 			uni.navigateTo({
 				url:'../login/login'
