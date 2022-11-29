@@ -70,7 +70,7 @@
       <text>活动中心</text>
   </view>
   <uni-col :span="12">
-  	<view class="demo-uni-col light">
+  	<view class="demo-uni-col light" @click="goChange()">
       <text>积分商城</text>
     </view>
   </uni-col>
@@ -80,7 +80,7 @@
     </view>
   </uni-col>
   <uni-col :span="12">
-  	<view class="demo-uni-col light">
+  	<view class="demo-uni-col light" @click="goVideo()">
       <text>视频专区</text>
     </view>
   </uni-col>
@@ -106,6 +106,18 @@
                     gutter: 0,
                    nvueWidth: 730
       };
+    },
+    methods:{
+      goChange(){
+        uni.switchTab({
+          url: '/pages/change/change'
+        }) 
+      },
+      goVideo(){
+        uni.navigateTo({
+          url: '/pages/video/video'
+        }) 
+      }
     }
   }
 </script>
@@ -117,6 +129,7 @@
 	}
 	.swiper {
 		height: 300rpx;
+    
 	}
 	.swiper-item {
 		display: block;

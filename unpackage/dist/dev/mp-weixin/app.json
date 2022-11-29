@@ -6,7 +6,11 @@
     "pages/order/order",
     "pages/mine/mine",
     "pages/video/video",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/shop-car/shop-car",
+    "pages/commit_order/commit_order",
+    "pages/address/address",
+    "pages/my_add_path/my_add_path"
   ],
   "subPackages": [],
   "window": {

@@ -6,7 +6,10 @@
 	 {
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "小0回收"
+				"navigationBarTitleText": "小0回收",
+        "navigationBarBackgroundColor":"#32CD32",
+        "navigationBarTextStyle":"white"
+        // 图片标题"titleImage":""
 			}
 		}
 	    ,{
@@ -80,6 +83,60 @@
                   }
                 }
             }
+        ,{
+            "path" : "pages/shop-car/shop-car",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom",
+                "navigationBarTitleText": "购物车",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/commit_order/commit_order",
+            "style" :                                                                                    
+            {
+              
+                "navigationBarTitleText": "提交订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/address/address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "地址管理",
+                "navigationBarBackgroundColor":"#FFFFFF",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my_add_path/my_add_path",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "新增地址",
+                "navigationBarBackgroundColor":"#FFFFFF",
+                "enablePullDownRefresh": false,
+                "app-plus":{
+                  "scrollIndicator":"none",
+                  "titleNView":{
+                    "buttons":[
+                      {
+                        "float":"right",
+                        "color":"#636263",
+                        "text":"保存",
+                        "fontSize":"16px",
+                        "width":"60px"
+                      }
+                    ]
+                  }
+                }
+            }
+            
+        }
     ],
   
   "tabBar": {

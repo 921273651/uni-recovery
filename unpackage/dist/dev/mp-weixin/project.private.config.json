@@ -14,7 +14,7 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/recycle/recycle",
+          "pathName": "pages/mine/mine",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -43,6 +43,27 @@
         {
           "name": "",
           "pathName": "pages/video/video",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/address/address",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/my_add_path/my_add_path",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/commit_order/commit_order",
           "query": "",
           "scene": null,
           "launchMode": "default"

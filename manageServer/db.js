@@ -52,7 +52,7 @@ const register = function (reqBody) {
   return sql;
 }
 
-//获取记账表列表
+//获取用户列表
 const getTest = function (userId) {
   const sql = `
         select
@@ -85,6 +85,28 @@ const getCatesList = function (cateType) {
 
   return sql;
 }
+
+//获取地址表数据
+const getAddress = function () {
+  let sql = `
+        select
+            *
+        from
+            tb_address
+        `;
+  return sql;
+}
+
+//插入地址数据
+const getInsertAddress = function (reqBody) {
+  const {address_name, address_phoneNumber, address_city, address_information, address_default} = reqBody;
+  const sql = `
+        INSERT into 
+        tb_address (address_name,address_phoneNumber,address_city,address_information,address_default) 
+        values('${address_name}','${address_phoneNumber}','${address_city}','${address_information}','${address_default}');
+        `;
+  return sql;
+}
 // 获取测试数据
 
 // const getTest = function (userId) {
@@ -99,41 +121,27 @@ const getCatesList = function (cateType) {
 //   return sql;
 // }
 //添加计划事务
-const addTaskData = function (reqBody) {
-  const { planId, userId, detail, type, plan, startTime } = reqBody
-  let sql;
-  console.log('planId', planId);
-  if (planId === 0) {
-    sql = `INSERT into plan (userId,detail,type,plan,startTime) values('${userId}','${detail}','${type}','${plan}','${startTime}');`
-  } else {
-    sql = `UPDATE plan SET detail='${detail}',plan='${plan}' where id = '${planId}'`
-  }
-  return sql;
-}
+// const addTaskData = function (reqBody) {
+//   const { planId, userId, detail, type, plan, startTime } = reqBody
+//   let sql;
+//   console.log('planId', planId);
+//   if (planId === 0) {
+//     sql = `INSERT into plan (userId,detail,type,plan,startTime) values('${userId}','${detail}','${type}','${plan}','${startTime}');`
+//   } else {
+//     sql = `UPDATE plan SET detail='${detail}',plan='${plan}' where id = '${planId}'`
+//   }
+//   return sql;
+// }
 
-//处理事务
-const solveTask = function (reqBody) {
-  const { planId, userId, detail, count } = reqBody
-  const sql1 = `INSERT into cost (planId,userId,detail,count,time) values('${planId}','${userId}','${detail}','${count}','${new Date().toLocaleDateString()}');`
-  const sql2 = `UPDATE plan SET cost = cost + '${count}' WHERE id = '${planId}';`
-  return { sql1, sql2 };
-}
 
-// 获取账单历史
-const getCostList = function (userId) {
-  const sql = `SELECT cost.id,cost.detail,cost.count,plan.detail as title,plan.type FROM cost INNER JOIN plan ON cost.planId = plan.id where cost.userId = ${userId};`
-  return sql;
-}
 
 module.exports = {
   Query,
-
   login,
   register,
-  addTaskData,
-  solveTask,
-  getCostList,
   getTest,
-  getCatesList
+  getCatesList,
+  getAddress,
+  getInsertAddress
 
 }
