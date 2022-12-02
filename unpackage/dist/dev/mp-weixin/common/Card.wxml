@@ -1,1 +1,0 @@
-<view class="page-Card"><block wx:if="{{$slots.default}}"><slot></slot></block><block wx:else><view class="cate-title">{{''+cardTitle+''}}</view></block></view>

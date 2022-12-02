@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "新增地址",
-  "navigationBarBackgroundColor": "#FFFFFF",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "mpvue-city-picker": "/components/mpvue-citypicker/mpvueCityPicker"
-  }
-}
