@@ -55,6 +55,105 @@
     .icon-share:before {
       content: "\e8b0";
     }
+    /* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+    @font-face {
+      font-family: "iconfont"; /* Project id 3523521 */
+      src: url('//at.alicdn.com/t/c/font_3523521_wf4hrb5crpa.woff2?t=1669975522450') format('woff2'),
+           url('//at.alicdn.com/t/c/font_3523521_wf4hrb5crpa.woff?t=1669975522450') format('woff'),
+           url('//at.alicdn.com/t/c/font_3523521_wf4hrb5crpa.ttf?t=1669975522450') format('truetype');
+    }
+    
+    .iconfont {
+      font-family: "iconfont" !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .icon-_clothes:before {
+      content: "\e60b";
+    }
+    
+    .icon-_zhixiang:before {
+      content: "\e627";
+    }
+    
+    .icon-fanhui:before {
+      content: "\e601";
+    }
+    
+    .icon-dingwei:before {
+      content: "\e8ba";
+    }
+    
+    .icon-clothes:before {
+      content: "\e8c7";
+    }
+    
+    .icon-dianqi:before {
+      content: "\e634";
+    }
+    
+    .icon-suliao:before {
+      content: "\e63e";
+    }
+    
+    .icon-_jiaju:before {
+      content: "\e609";
+    }
+    
+    .icon-zhongjinshu:before {
+      content: "\e81a";
+    }
+    
+    .icon-zhixiang:before {
+      content: "\e61e";
+    }
+    
+    .icon-_suliao:before {
+      content: "\e8c8";
+    }
+    
+    .icon-_zhongjinshu:before {
+      content: "\e8cb";
+    }
+    
+    .icon-_dianqi:before {
+      content: "\e8ca";
+    }
+    
+    .icon-jiaju:before {
+      content: "\e8c9";
+    }
+    
+    .icon-mine:before {
+      content: "\e600";
+    }
+    
+    .icon-shenghuodianmianduihuan:before {
+      content: "\e645";
+    }
+    
+    .icon-dingdan:before {
+      content: "\e649";
+    }
+    
+    .icon-xunhuan:before {
+      content: "\e608";
+    }
+    
+    .icon-shouye:before {
+      content: "\e605";
+    }
+    
+    .icon-tubiao-:before {
+      content: "\e603";
+    }
+    
+    .icon-jifenduihuan:before {
+      content: "\e60a";
+    }
 
   //放置公共文件，颜色属性
   .yellow{

@@ -80,10 +80,22 @@
   export default {
     data() {
       return {
-        time: '12:01'
+        time: '12:01',
+        itemId:''
       }
     },
+    onLoad(option){
+       console.log(option.id,'回收页');
+       this.itemId=option.id;
+       this.getDetail();
+    },
     methods:{
+      //拿到当前分类id以及分类下的数据
+      getDetail(){
+        // uni.request({
+         
+        //    )}
+          },
        bindPickerChange: function(e) {
                   console.log('picker发送选择改变，携带值为', e.detail.value)
                   this.index = e.detail.value
