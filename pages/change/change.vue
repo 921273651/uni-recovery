@@ -2,6 +2,7 @@
   <view class="page">
     <uni-card title="用户名" extra="当前积分为:30" :thumbnail="avatar" @click="onClick">
 <!-- 10.11 -->
+
     </uni-card>
     <view class="advertise">
       <image :src="url" mode="widthFix"></image>

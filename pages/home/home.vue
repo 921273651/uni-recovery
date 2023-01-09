@@ -85,7 +85,7 @@
       };
     },
     onLoad() {
-     this.getItemList();//获取回收分类列表
+     this.getitemList();//获取回收分类列表
       },
     methods:{
       //根据index跳转到对应下单详情
@@ -99,7 +99,7 @@
       },
       
       //获取itemList
-      getItemList(){
+      getitemList(){
         uni.request({
           url:'http://localhost:3000/api/item/getItemList',//获取分类列表接口
           success:(res) =>{

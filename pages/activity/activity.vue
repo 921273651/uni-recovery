@@ -44,6 +44,7 @@
   img {
     width: 100%;
   }
+  
   .text{
     position: absolute;
     bottom: 0;

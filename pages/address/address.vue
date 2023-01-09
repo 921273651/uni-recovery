@@ -5,7 +5,7 @@
     <view class="path_list" >
       <view class='path_item' v-for="(item,index) in addressList " :key='index'>
         <view class="item_main">
-          <view class="item_name">{{item.address_name}}</view>
+          <view class="item_name">{{item.address_username}}</view>
           <view>{{item.address_phoneNumber}}</view>
         </view>
         <view class="item_main">

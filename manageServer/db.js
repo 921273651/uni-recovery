@@ -119,6 +119,7 @@ const getInsertAddress = function(reqBody) {
         `;
   return sql;
 }
+//获取分类列表
 const getItemList = function() {
   let sql = `
         select
@@ -128,6 +129,20 @@ const getItemList = function() {
         `;
   return sql;
 }
+//获取分类列表下详细信息
+const getInformation = function(reqBody) {
+  console.log('reqBody11', reqBody)
+  let sql = `
+        select
+            *
+        from
+            tb_recycle
+            where
+                tb_recycle.category_id='${reqBody.category_id}'
+        `;
+  return sql;
+}
+
 // 获取测试数据
 
 // const getTest = function (userId) {
@@ -165,4 +180,5 @@ module.exports = {
   getAddress,
   getInsertAddress,
   getItemList,
+  getInformation,
 }

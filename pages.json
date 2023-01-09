@@ -58,8 +58,9 @@
                 "enablePullDownRefresh": false
             }
             
-        }
-        ,{
+        },
+        
+        {
             "path" : "pages/details/details",
             "style" :                                                                                    
             {
@@ -139,6 +140,24 @@
         }
         ,{
             "path" : "pages/activity/activity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/register/register",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
