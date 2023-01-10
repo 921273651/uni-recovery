@@ -1,4 +1,5 @@
 <template>
+  <view>
   <!-- 发货确定订单 -->
   <view class="page_commitOrder">
     <!-- 顶部信息页开始 -->
@@ -63,6 +64,8 @@
 
     </view>
   </view>
+  </view>
+  
 </template>
 
 <script>
@@ -87,7 +90,7 @@
       // async chooseAddress() {
       //   const [err, succ]  = await uni.chooseAddress().catch(err => err)
       //   if (err === null && succ.errMsg === 'chooseAddress:ok') {
-      //     console.log(succ)
+      //     console.log('succ', succ)
       //     this.address=succ
       //   }
       //   // console.log(res)

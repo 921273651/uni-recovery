@@ -31,36 +31,12 @@
   <!-- 分类列表start -->
   <view class="example-body">
   				<uni-row class="demo-uni-row" :width="nvueWidth">
-  					<uni-col :span="12">
-  						<view class="demo-uni-col light">
-                <text>纸品类</text>
+  					<uni-col :span="12" v-for="(item,index) in itemList" :key="item.id"  :data-itemid="(item.id)" >
+  						<view class="demo-uni-col light" @click="goItem(index)">
+                <text>{{item.category}}</text>
               </view>
   					</uni-col>
-  					<uni-col :span="12">
-  						<view class="demo-uni-col light">
-                 <text>衣物类</text>
-              </view>
-  					</uni-col>
-            <uni-col :span="12">
-            	<view class="demo-uni-col light">
-                 <text>塑料类</text>
-              </view>
-            </uni-col>
-            <uni-col :span="12">
-            	<view class="demo-uni-col light">
-                 <text>金属类</text>
-              </view>
-            </uni-col>
-            <uni-col :span="12">
-            	<view class="demo-uni-col light">
-                 <text>家具类</text>
-              </view>
-            </uni-col>
-            <uni-col :span="12">
-            	<view class="demo-uni-col light">
-                 <text>废旧电器类</text>
-              </view>
-            </uni-col>
+  					
   				</uni-row>
           </view>
   <!-- 分类列表end -->
@@ -104,10 +80,37 @@
                     interval: 2000,
                     duration: 500,
                     gutter: 0,
-                   nvueWidth: 730
+                   nvueWidth: 730,
+                   itemList:[],
       };
     },
+    onLoad() {
+     this.getitemList();//获取回收分类列表
+      },
     methods:{
+      //根据index跳转到对应下单详情
+      //uni.switch跳转tab页面不能进行传参，要使用uni.relanch
+      goItem(index){
+      console.log(this.itemList[index].id);
+      let itemId=this.itemList[index].id;
+       uni.reLaunch({
+         url: '/pages/recycle/recycle?id=' + itemId
+       }) 
+      },
+      
+      //获取itemList
+      getitemList(){
+        uni.request({
+          url:'http://localhost:3000/api/item/getItemList',//获取分类列表接口
+          success:(res) =>{
+            console.log(res,'分类列表接口返回的信息');
+            if(res.data.code==2000){
+             this.itemList=res.data.data;
+              console.log(res.data.data,'分类列表')
+            }
+          }
+        })  
+      },
       goChange(){
         uni.switchTab({
           url: '/pages/change/change'

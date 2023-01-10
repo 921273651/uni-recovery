@@ -4,42 +4,41 @@ const db = require('../db.js');
 
 // 登录
 router.post('/login', (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let sql = db.login(username, password);
+  let sql = db.login(req.body);
+  console.log('sql', sql);
 
   db.Query(sql).then(data => {
-    if (data.length) {
+    console.log('data',data);
+    if (data.length>0) {
       console.log('用户登录成功！');
-      res.send({ "code": "2000", "success": "登录成功！", 'data': { 'name': data[0].name, 'userId': data[0].id } });
+      res.send({ "code": "2000", "message": "登录成功！" });
     } else {
-      console.log("账号或者密码错误，登录失败！");
-      res.send({ "code": "401", "error": "账号或者密码错误，登录失败！" });
+      res.send({ "code": "400", "message": "账号或密码错误！" });
     }
   }, err => {
     console.log('err', err);
-    res.send({ "code": "401", "error": err });
+    res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
   })
 });
 
 //注册用户
 router.post('/register', (req, res) => {
   let sql = db.register(req.body);
-  console.log('req.body',req.body)
-  console.log('req.query',req.query)
   console.log('sql', sql);
   db.Query(sql).then(data => {
-    console.log('data', data);
     if (data) {
       console.log('用户注册成功！');
-      res.send({ "code": "2000", "success": "注册成功！" });
+      res.send({ "code": "2000", "message": "注册成功！" });
     } else {
-      console.log("账号或者密码错误，注册失败！");
-      res.send({ "code": "401", "error": "账号或者密码错误，注册失败！" });
+      res.send({ "code": "500", "message": "服务器内部错误！" });
     }
   }, err => {
     console.log('err', err);
-    res.send({ "code": "401", "error": err });
+    if(err.code==='ER_DUP_ENTRY') {
+      res.send({ "code": "400", "message": '该账号已存在，无法重复注册！' });
+    } else {
+      res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
+    }
   })
 })
 

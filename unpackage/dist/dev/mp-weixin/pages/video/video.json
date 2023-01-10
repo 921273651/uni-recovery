@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "视频专区",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "cate-list": "/common/CateList"
-  }
-}

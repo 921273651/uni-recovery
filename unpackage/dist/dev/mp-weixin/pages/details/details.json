@@ -1,9 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "navigationBarTitleText": "商品详情",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "card": "/common/Card",
-    "cate-list": "/common/CateList"
-  }
-}

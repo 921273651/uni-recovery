@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db.js');
 
-//测试
+//获取商品列表
 router.get('/getCatesList', (req, res) => {
     let sql = db.getCatesList(req.query.cateType);
     console.log('sql', sql);

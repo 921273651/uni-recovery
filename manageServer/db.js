@@ -7,17 +7,17 @@ let pool = mysql.createPool({
   database: 'db_uni_recovery',
   port: 3306,
   connectionLimit: 50, //允许连接数
-  multipleStatements: true,  //是否允许执行多条sql语句
+  multipleStatements: true, //是否允许执行多条sql语句
   timezone: "08:00"
 })
 
 let Query = (sql, ...params) => {
-  return new Promise(function (resolve, reject) {
-    pool.getConnection(function (err, connection) {
+  return new Promise(function(resolve, reject) {
+    pool.getConnection(function(err, connection) {
       if (err) {
         return reject(err);
       }
-      connection.query(sql, params, function (error, res) {
+      connection.query(sql, params, function(error, res) {
         // console.log(res);
         pool.releaseConnection(connection)
         if (error) {
@@ -33,27 +33,35 @@ let Query = (sql, ...params) => {
  * sql语句
  * */
 //登录验证
-const login = function (username, password) {
+const login = function(reqBody) {
+  const {
+    cellphone,
+    password,
+  } = reqBody;
   const sql = `
         select
             *
         from
-            user
+            tb_user
         where
-            user.username='${username}' and user.password='${password}'
+            username='${cellphone}' and password='${password}'
         `;
   return sql;
 }
 
 //注册用户
-const register = function (reqBody) {
-  const { nickname, username, password, imgSrc } = reqBody;
-  const sql = `INSERT into tb_user (nickname,username,password,imgSrc) values('${nickname}','${username}','${password}','${imgSrc}');`
+const register = function(reqBody) {
+  const {
+    cellphone,
+    password,
+  } = reqBody;
+  const sql =
+    `INSERT into tb_user (username,password) values('${cellphone}','${password}');`
   return sql;
 }
 
 //获取用户列表
-const getTest = function (userId) {
+const getTest = function(userId) {
   const sql = `
         select
             *
@@ -65,16 +73,16 @@ const getTest = function (userId) {
   return sql;
 }
 //获取商品列表
-const getCatesList = function (cateType) {
+const getCatesList = function(cateType) {
   let sql = '';
-  if(cateType === 'goods'){
+  if (cateType === 'goods') {
     sql = `
           select
               *
           from
               tb_goods
           `;
-  } else if(cateType === 'videos') {
+  } else if (cateType === 'videos') {
     sql = `
           select
               *
@@ -87,7 +95,7 @@ const getCatesList = function (cateType) {
 }
 
 //获取地址表数据
-const getAddress = function () {
+const getAddress = function() {
   let sql = `
         select
             *
@@ -98,8 +106,14 @@ const getAddress = function () {
 }
 
 //插入地址数据
-const getInsertAddress = function (reqBody) {
-  const {address_name, address_phoneNumber, address_city, address_information, address_default} = reqBody;
+const getInsertAddress = function(reqBody) {
+  const {
+    address_name,
+    address_phoneNumber,
+    address_city,
+    address_information,
+    address_default
+  } = reqBody;
   const sql = `
         INSERT into 
         tb_address (address_name,address_phoneNumber,address_city,address_information,address_default) 
@@ -107,6 +121,30 @@ const getInsertAddress = function (reqBody) {
         `;
   return sql;
 }
+//获取分类列表
+const getItemList = function() {
+  let sql = `
+        select
+            *
+        from
+            tb_item
+        `;
+  return sql;
+}
+//获取分类列表下详细信息
+const getInformation = function(reqBody) {
+  console.log('reqBody11', reqBody)
+  let sql = `
+        select
+            *
+        from
+            tb_recycle
+            where
+                tb_recycle.category_id='${reqBody.category_id}'
+        `;
+  return sql;
+}
+
 // 获取测试数据
 
 // const getTest = function (userId) {
@@ -142,6 +180,7 @@ module.exports = {
   getTest,
   getCatesList,
   getAddress,
-  getInsertAddress
-
+  getInsertAddress,
+  getItemList,
+  getInformation,
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db.js');
 
-//获取
+//获取地址接口
 router.get('/getAddress', (req, res) => {
     let sql = db.getAddress(req.query);
     console.log('sql', sql);
