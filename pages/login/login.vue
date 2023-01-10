@@ -8,13 +8,13 @@
         <!-- 账号 -->
         <view class="phoneCs">
           <i class="iconfont icon-mine"></i>
-          <input placeholder="请输入账号" type="text" bindtap="content"/>
+          <input v-model="cellPhone" placeholder="请输入账号" type="text" bindtap="content"/>
         </view>
         
         <!-- 密码 -->
         <view class="passwordCs">
           <i class="iconfont icon-jiesuo"></i>
-          <input placeholder="请输入密码" type="password" bindtap="password"/>
+          <input v-model="password" placeholder="请输入密码" type="password" bindtap="password"/>
           <image src="/images/eye-open.png" class="eye"></image>
         </view>
         
@@ -25,13 +25,15 @@
         </view>
         
         <view class="denglu">
-          <button class="btn-dl" type="primary" @click="goadmin">登录</button>
+          <button class="btn-dl" type="primary" @click="login">登录</button>
         </view>
         
         <!-- 协议区 -->
         <view class="xieyi">
-       <checkbox class="isXY"></checkbox>
-       <view class="text-xy" bindtap="goxieyi">同意小程序的《平台协议》</view>
+	   <checkbox-group @change="checked = !checked;">
+	   	<checkbox class="isXY" :checked="checked"></checkbox>
+	   	<span class="text-xy" bindtap="goxieyi">同意小程序的《平台协议》</span>
+	   </checkbox-group>
      </view>
       </view>
       
@@ -46,7 +48,9 @@
   export default {
     data() {
       return {
-       
+		  cellPhone: '',
+		  password: '',
+		  checked: false
       }
     },
    onShow() {
@@ -54,8 +58,56 @@
    },
 
     methods: {
-      goadmin(){
+      login(){
         console.log("写入登陆方法");
+		if (!(this.cellPhone && this.password)) {
+			uni.showToast({
+			    title: '请填写表单内容！',
+			    icon: 'none',
+			    duration: 2000
+			})
+			return;
+		}
+		if (!this.checked) {
+			uni.showToast({
+			    title: '请阅读并勾选平台协议！',
+			    icon: 'none',
+			    duration: 2000
+			})
+			return;
+		}
+		
+		uni.request({
+		  url:'http://localhost:3000/api/user/login',
+		  method:'POST',
+		  data: {
+		    cellphone: this.cellPhone,
+			password: this.password
+		  },
+		  success:(res) =>{
+			  console.log('res',res)
+		    if(res.data.code==2000){		    
+			  uni.showToast({
+			      title: res.data.message,
+			      icon: 'success',
+			      duration: 2000,
+				  success: ()=>{
+					  setTimeout(()=>{
+						uni.reLaunch({
+						  url: '/pages/home/home'
+						}) 
+					  },500)
+				  }
+			  })
+		    } else {
+			  uni.showToast({
+			      title: res.data.message,
+			      icon: 'none',
+			      duration: 2000
+			  })
+			}
+		  }
+		})
       },
   },
   }

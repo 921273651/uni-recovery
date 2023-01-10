@@ -46,7 +46,7 @@
             "sdkConfigs" : {
                 "oauth" : {
                     "weixin" : {
-                      "appsecret":"d589d32e12a1b91cd39b5de31d3a80f2"
+                        "appsecret" : "d589d32e12a1b91cd39b5de31d3a80f2"
                     }
                 }
             }

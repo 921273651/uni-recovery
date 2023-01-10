@@ -4,7 +4,7 @@
     <!-- 用户信息开始 -->
     <view class="user-box">
       <view class="getuserInfo" v-if="JSON.stringify(user)=== '{}'">
-        <button type="primary" size="mini" class="btn_getuserInfo" @click="getuserInfo">点击登录</button>
+        <button type="primary" size="mini" class="btn_getuserInfo" @click="gotoLogin">点击登录</button>
 
       </view>
       <view class="user-info" v-else>
@@ -52,22 +52,10 @@
     },
 
     methods: {
-      getuserInfo() {
-        wx.login({
-           success (res) {
-              if (res.code) {
-                //发起网络请求
-                wx.request({
-                  url: 'https://example.com/onLogin',
-                  data: {
-                    code: res.code
-                  }
-                })
-              } else {
-                console.log('登录失败！' + res.errMsg)
-              }
-            }
-        })
+      gotoLogin() {
+        uni.navigateTo({
+          url: '/pages/login/login'
+        }) 
     }
   },
   }
