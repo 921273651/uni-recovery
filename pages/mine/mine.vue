@@ -3,18 +3,17 @@
 
     <!-- 用户信息开始 -->
     <view class="user-box">
-      <view class="getuserInfo" v-if="JSON.stringify(user)=== '{}'">
+      <view class="getuserInfo" v-if="!userInfo">
         <button type="primary" size="mini" class="btn_getuserInfo" @click="gotoLogin">点击登录</button>
-
       </view>
       <view class="user-info" v-else>
         <!-- 用户头像 -->
         <view class="avatar">
-          <image :src="'{{user.avatarUrl}}'" class="avatorImage"></image>
+          <image :src="userInfo.imgSrc" class="avatorImage"></image>
         </view>
         <!-- 用户名称 -->
         <view class="username">
-          <view class="user_name">{{user.nickName}}</view>
+          <view class="user_name">{{userInfo.nickname}}</view>
         </view>
 
       </view>
@@ -33,6 +32,7 @@
         <view class="nav"><i class="iconfont icon-dingdan">我的订单</i></view>
         <view class="nav"><i class="iconfont icon-zhiyuanzhaomu">回收员招募</i></view>
         <view class="nav"><i class="iconfont icon--kefu">客服</i></view>
+        <view class="nav"><i class="iconfont icon--kefu" @click="logout">退出登录</i></view>
       </view>
     </view>
     <!-- 底部活动导航结束 -->
@@ -45,18 +45,22 @@
       return {
         appid: 'wx08f2162c5c1ee872',
         secret: 'd589d32e12a1b91cd39b5de31d3a80f2',
-        user: {
-
-        }
+        userInfo: uni.getStorageSync('userInfo')
       }
     },
 
     methods: {
-      gotoLogin() {
-        uni.navigateTo({
-          url: '/pages/login/login'
-        }) 
-    }
+		gotoLogin() {
+			uni.navigateTo({
+				url: '/pages/login/login'
+			}) 
+		},
+		logout() {
+			uni.removeStorageSync('userInfo');
+			uni.reLaunch({
+				url: '/pages/mine/mine'
+			}) 
+		}
   },
   }
 
@@ -76,10 +80,19 @@
 
   .user-info {
     height: 150px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
   }
 
   .avatar {
     text-align: center;
+	.avatorImage {
+		width: 150rpx;
+		height: 150rpx;
+		border: 1px solid tomato;
+	}
   }
 
   .avatorImage {

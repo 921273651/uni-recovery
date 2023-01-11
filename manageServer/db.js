@@ -44,7 +44,7 @@ const login = function(reqBody) {
         from
             tb_user
         where
-            username='${cellphone}' and password='${password}'
+        tb_user.username='${cellphone}' and tb_user.password='${password}'
         `;
   return sql;
 }

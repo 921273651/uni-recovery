@@ -9,9 +9,9 @@ router.post('/login', (req, res) => {
 
   db.Query(sql).then(data => {
     console.log('data',data);
-    if (data.length>0) {
+    if (data.length) {
       console.log('用户登录成功！');
-      res.send({ "code": "2000", "message": "登录成功！" });
+      res.send({ "code": "2000", "data": data, "message": "登录成功！" });
     } else {
       res.send({ "code": "400", "message": "账号或密码错误！" });
     }
