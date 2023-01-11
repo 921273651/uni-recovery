@@ -33,40 +33,30 @@ let Query = (sql, ...params) => {
  * sql语句
  * */
 //登录验证
-const login = function(appid,secret) {
+const login = function(reqBody) {
+  const {
+    cellphone,
+    password,
+  } = reqBody;
   const sql = `
         select
             *
         from
             tb_user
         where
-            user.appid='${appid}' and user.secret='${password}'
+            username='${cellphone}' and password='${password}'
         `;
   return sql;
 }
 
-// const login = function(username, password) {
-//   const sql = `
-//         select
-//             *
-//         from
-//             user
-//         where
-//             user.username='${username}' and user.password='${password}'
-//         `;
-//   return sql;
-// }
-
 //注册用户
 const register = function(reqBody) {
   const {
-    nickname,
-    username,
+    cellphone,
     password,
-    imgSrc
   } = reqBody;
   const sql =
-    `INSERT into tb_user (nickname,username,password,imgSrc) values('${nickname}','${username}','${password}','${imgSrc}');`
+    `INSERT into tb_user (username,password) values('${cellphone}','${password}');`
   return sql;
 }
 
