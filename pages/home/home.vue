@@ -99,17 +99,8 @@
       },
       
       //获取itemList
-      getitemList(){
-        uni.request({
-          url:'http://localhost:3000/api/item/getItemList',//获取分类列表接口
-          success:(res) =>{
-            console.log(res,'分类列表接口返回的信息');
-            if(res.data.code==2000){
-             this.itemList=res.data.data;
-              console.log(res.data.data,'分类列表')
-            }
-          }
-        })  
+      async getitemList(){
+		  this.itemList = await this.$api.getItemList();
       },
       goChange(){
         uni.switchTab({
