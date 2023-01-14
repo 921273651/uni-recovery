@@ -21,10 +21,10 @@
 <view class="address-info-box" v-else>
 <view class="row1">
   <view class="row1-left">
-    <view class="username">收货人:{{address.userName}} </view>
+    <view class="username">收货人:{{address.address_username}} </view>
   </view>
   <view class="row1-right">
-    <view class="phone">电话：{{address.telNumber}}</view>
+    <view class="phone">电话：{{address.address_phoneNumber}}</view>
     <uni-icons type="arrowright" size=16></uni-icons>
   </view>
 </view>
@@ -33,7 +33,7 @@
     收货地址：
   </view>
   <view class="row2-right">
-    {{addstr}}
+    {{address.address_information}}
   </view>
 </view>
         </view>
@@ -46,18 +46,18 @@
       <!-- 顶部信息页结束 -->
       <!-- 中间商品列表开始 -->
 
-      <view class="order_center">
+     <!-- <view class="order_center">
         <view class="center_img"></view>
         <view class="center_content"></view>
         <view class="center_num"></view>
         <view class="center_price"></view>
-      </view>
+      </view> -->
 
 
       <!-- 中间商品列表结束 -->
       <!-- 底部结算开始 -->
       <view class="order_bottom">
-
+<button type="primary" size="mini" class="ordbtn">确认提交 </button>
 
       </view>
       <!-- 底部结算结束 -->
@@ -75,7 +75,21 @@
        address:{
          
        },
+       orderId:'',
+       addressId:''
       };
+    },
+  async onLoad(option) {
+      this.orderId = option.orderId;
+      this.addressId = option.addressId;
+      if(option.addressId){
+        const res = await this.$api.getAddressList({addressId: this.addressId});
+        if(res) {
+          console.log('res',res);
+          this.address = res[0];
+        }
+      }
+      
     },
     onShow() {
       wx.hideHomeButton(); //消除返回首页按钮
@@ -83,7 +97,7 @@
     methods: {
       pickAddress(){
         uni.navigateTo({
-          url: '/pages/address/address'
+          url: `/pages/address/address?orderId=${this.orderId}`
         })
       }
       
@@ -153,7 +167,12 @@
     .address-choose-box{
       text-align: center;
     }
+    
   }
-  
+  .order_bottom{
+    margin-top: 100rpx;
+    display: flex;
+    justify-content: center;
+  }
   
 </style>

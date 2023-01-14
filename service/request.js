@@ -1,6 +1,7 @@
 export default {
 	config: {
 		baseURL: 'http://192.168.31.63:3000/api/',
+		// baseURL: 'http://localhost:3000/api/',
 		// 处理token的方法
 		getToken() {
 			let token = uni.getStorageSync('token');
@@ -18,7 +19,8 @@ export default {
 			        options.method = options.method || 'GET';
 			        // 封装自己的请求头
 			        options.header = {
-			          token: this.getToken()
+			          // token: this.getToken()
+			          token: uni.getStorageSync('userInfo').userId
 			        }
 			        resolve(options)
 			      })

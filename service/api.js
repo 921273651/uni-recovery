@@ -13,10 +13,10 @@ export default {
 		return [];
 	},
   //获取地址
-  
- async getAddressList(){
+ async getAddressList(params){
    const res = await fetch.request({
    	url: 'address/getAddress',
+    data:params
    });
    if (res.code === '2000') {
    	return res.data;
@@ -35,7 +35,35 @@ async getInsertAddress(params) {
 		}
 		return [];
 	},
-//获取商品详情
+  
+  //选择收货地址
+  
+  async selectAddress(params) {
+  		const res = await fetch.request({
+  			url: 'goods/selectAdress',
+        method: 'POST',
+        data:params
+  		});
+  		if (res.code === '2000') {
+  			return res.data;
+  		}
+  		return [];
+  	},
+//生成订单
+async creatOrder(params) {
+    console.log('params123', params)
+		const res = await fetch.request({
+			url: 'goods/creatOrder',
+      method: 'POST',
+      data:params
+		});
+    console.log('params123', res)
+		if (res.code === '2000') {
+			return res.data;
+		}
+		return [];
+	},
+
 
 async getCatesList(params) {
 		const res = await fetch.request({

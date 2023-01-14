@@ -3,7 +3,7 @@
   <view class="page_myAddress">
     <!-- 地址列表开始 -->
     <view class="path_list" >
-      <view class='path_item' v-for="(item,index) in addressList " :key='index' @click="selectAddress(item)">
+      <view class='path_item' v-for="(item,index) in addressList " :key='index' @click="selectAddress(item.address_id)">
         <view class="item_main">
           <view class="item_name">{{item.address_username}}</view>
           <view>{{item.address_phoneNumber}}</view>
@@ -34,9 +34,13 @@
     
       return {
         addressList:[],
+        addressId:'',
+        
       };
     },
-    onLoad(){
+    onLoad(option){
+       console.log('地址页',option);
+      this.orderId=option.orderId
      this.getAddressList()
     },
     onShow(){
@@ -54,8 +58,16 @@
       
      },
      
-     selectAddress(item){
-       
+     selectAddress(addressId){
+      const res = this.$api.selectAddress(
+      {
+        orderId:this.orderId,
+        addressId:addressId,
+      }
+      )
+      uni.navigateTo({
+        url:'../commit_order/commit_order?addressId='+addressId
+      })
      }
     },
     

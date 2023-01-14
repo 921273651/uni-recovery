@@ -23,8 +23,7 @@
    <!-- 轮播结束 -->
    <!-- 积分与名称开始 -->
    <view class="details-goods">
-     <view class="details-points"> </view>
-     <view class="goods_name">精品定制口罩</view>
+     <view class="goods_name">{{}}</view>
      <view class="goods_points">
        100积分
      </view>
@@ -75,14 +74,15 @@
       };
     },
     onLoad(option) {
-    this.getGoodsList(),
-    console.log(option.id,'商品详情页');
+      console.log(option.id,'商品详情页');
+      this.goodsId=option.id;
+    this.getGoodsList()
     },
     methods:{
      async getGoodsList(){
-        this.CatesList = await this.$api.getCatesList({cateType: 'goods'});
+        this.CatesList = await this.$api.getCatesList({cateType: 'goods',goodId:this.goodsId});
       },
-      
+
       goBack(){
         uni.navigateBack({
           delta:1
@@ -92,10 +92,13 @@
         uni.showModal({
           title: '提示',
                       content: '确认兑换 ？',
-                      success: function (res) {
+                      success:  async(res) => {
                           if (res.confirm) {
                               console.log('用户点击确定')
-                              
+                               const res1 = await this.$api.creatOrder({
+                                 goodId:this.goodsId
+                               })
+                               console.log('res1',res1);
                               // uni.request({
                               //   url:'http://localhost:3000/api/address/getAddress',
                               //   success:(res) =>{
@@ -108,7 +111,7 @@
                               //   }
                               // })
                               uni.navigateTo({
-                                url:'/pages/commit_order/commit_order'
+                                url:`/pages/commit_order/commit_order?orderId=${res1.insertId}`
                               })
                               
                           }else{
