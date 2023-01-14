@@ -3,13 +3,13 @@
   <view class="page_myAddress">
     <!-- 地址列表开始 -->
     <view class="path_list" >
-      <view class='path_item' v-for="(item,index) in addressList " :key='index'>
+      <view class='path_item' v-for="(item,index) in addressList " :key='index' @click="selectAddress(item)">
         <view class="item_main">
           <view class="item_name">{{item.address_username}}</view>
           <view>{{item.address_phoneNumber}}</view>
         </view>
         <view class="item_main">
-        <view class="active" v-if="item.address_default">默认</view>
+        <view class="active" v-if="item.address_default==='1'">默认</view>
         <view>{{item.address_information}}</view>
         </view>
       </view>
@@ -48,18 +48,14 @@
           url:'/pages/my_add_path/my_add_path'
         })
       },
-     getAddressList(){
-       uni.request({
-         url:'http://localhost:3000/api/address/getAddress',
-         success:(res) =>{
-           console.log(res,'地址接口返回的信息');
-           if(res.data.code==2000){
-            this.addressList=res.data.data;
-           
-             console.log(res.data.data,'地址列表')
-           }
-         }
-       })
+      
+    async getAddressList(){
+       this.addressList = await this.$api.getAddressList();
+      
+     },
+     
+     selectAddress(item){
+       
      }
     },
     

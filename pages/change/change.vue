@@ -14,7 +14,7 @@
       <view class="container03">
         <view class="container02" >
             <view class="scroll-H">
-              <uni-col :span="12" @tap='godetails()'>
+              <uni-col :span="12" @tap='godetails()' >
               	<view class="demo-uni-col light">
                   <text>防疫口罩</text>
                 </view>
@@ -49,13 +49,6 @@
       return {
         url: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.uhbXYV8AJqA879-E_eHGDgHaC_?w=186&h=80&c=7&r=0&o=5&dpr=1.88&pid=1.7',
         avatar: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.VWRK3D4CN_uVkIhEsttI8wHaF2?w=246&h=194&c=7&r=0&o=5&dpr=1.88&pid=1.7',
-
-        extraIcon: {
-          color: '#4cd964',
-          size: '22',
-          type: 'gear-filled',
-
-        },
         
       }
     },

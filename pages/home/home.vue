@@ -100,7 +100,7 @@
       
       //获取itemList
       async getitemList(){
-		  this.itemList = await this.$api.getItemList();
+        this.itemList = await this.$api.getItemList();
       },
       goChange(){
         uni.switchTab({

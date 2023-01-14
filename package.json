@@ -6,6 +6,7 @@
     "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.3.0",
     "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
     "request": "^2.88.2",
     "uview-ui": "^2.0.33",
     "vant-weapp": "^0.5.29"

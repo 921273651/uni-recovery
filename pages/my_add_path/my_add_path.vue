@@ -36,6 +36,7 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
   export default {
     data() {
       return {
+        addressList:[],
         cityName:"请选择 >",
         pickerValueDefault:[0,0,1],
         address_name: '', 
@@ -64,27 +65,23 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
           this.address_city=e.label;
           this.cityName=e.label;
         },
+     
+        
         addPath(){
-          console.log('111',this.address_name, this.address_phoneNumber, this.address_city, this.address_information, this.address_default)
-          uni.request({
-            url:'http://localhost:3000/api/address/getInsertAddress',
-            method:'POST',
-            data:{
-              address_name:this.address_name, 
+          const res = this.$api.getInsertAddress(
+            {
+              address_username:this.address_name, 
               address_phoneNumber:this.address_phoneNumber, 
               address_city:this.address_city, 
               address_information:this.address_information,
               address_default:this.address_default
-            },
-            success:(res) =>{
-              console.log(res,'地址接口返回的信息');
-              if(res.data.code==2000){
-               this.addressList=res.data.data;
-              
-                console.log(res.data.data,'地址列表')
-              }
             }
-          })
+          );
+          console.log(1,res)
+          if(res) {
+            this.addressList=res.data;
+            console.log('address', this.addressList)
+          }
         }
       }
   }

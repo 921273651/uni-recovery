@@ -108,7 +108,7 @@ const getAddress = function() {
 //插入地址数据
 const getInsertAddress = function(reqBody) {
   const {
-    address_name,
+    address_username,
     address_phoneNumber,
     address_city,
     address_information,
@@ -116,8 +116,8 @@ const getInsertAddress = function(reqBody) {
   } = reqBody;
   const sql = `
         INSERT into 
-        tb_address (address_name,address_phoneNumber,address_city,address_information,address_default) 
-        values('${address_name}','${address_phoneNumber}','${address_city}','${address_information}','${address_default}');
+        tb_address (address_username,address_phoneNumber,address_city,address_information,address_default) 
+        values('${address_username}','${address_phoneNumber}','${address_city}','${address_information}','${address_default}');
         `;
   return sql;
 }
