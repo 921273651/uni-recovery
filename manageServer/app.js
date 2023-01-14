@@ -15,6 +15,7 @@ let testRouter = require('./routes/test')
 let goodsRouter = require('./routes/goods')
 let addressRouter=require('./routes/address.js')
 let itemRouter=require('./routes/item.js')
+let recycleRouter=require('./routes/recycle.js')
 // 实例化
 let app = express();
 app.listen(3000);
@@ -63,4 +64,5 @@ app.use('/api/test', testRouter);
 app.use('/api/goods', goodsRouter);
 app.use('/api/address',addressRouter);
 app.use('/api/item',itemRouter);
+app.use('/api/recycle',recycleRouter);
 module.exports = app;

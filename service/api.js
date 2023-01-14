@@ -99,5 +99,17 @@ async getCatesList(params) {
 			return res;
 		}
 		return null;
+	},
+	
+	async orderRecycle(params) {
+		const res = await fetch.request({
+			url: 'recycle/orderRecycle',
+			method: 'POST',
+			data: params
+		});
+		if (res.code === '2000') {
+			return res;
+		}
+		return null;
 	}
 }
