@@ -73,34 +73,43 @@ const getTest = function(userId) {
   return sql;
 }
 //获取商品列表
-const getCatesList = function(cateType) {
+const getCatesList = function(reqBody) {
   let sql = '';
-  if (cateType === 'goods') {
+  const {cateType, goodId} = reqBody;
     sql = `
           select
               *
           from
-              tb_goods
+              tb_${cateType}
+          ${goodId?"where id="+goodId:""}
           `;
-  } else if (cateType === 'videos') {
-    sql = `
-          select
-              *
-          from
-              tb_video
-          `;
-  }
 
   return sql;
 }
 
+//生成订单
+const createOrder = function(reqBody, userId) {
+  const {goodId} = reqBody;
+  const sql = `INSERT into tb_order (user_id,good_id) values('${userId}','${goodId}');`
+  return sql;
+}
+
+//选择地址
+const selectAdress = function(reqBody) {
+  const {orderId, addressId} = reqBody;
+  const sql = `UPDATE tb_order SET address_id='${addressId}' where order_id = '${orderId}'`
+  return sql;
+}
+
 //获取地址表数据
-const getAddress = function() {
+const getAddress = function(reqBody) {
+  const {addressId} = reqBody;
   let sql = `
         select
             *
         from
             tb_address
+        ${addressId?'where address_id ='+addressId:''}
         `;
   return sql;
 }
@@ -183,4 +192,6 @@ module.exports = {
   getInsertAddress,
   getItemList,
   getInformation,
+  createOrder,
+  selectAdress
 }
