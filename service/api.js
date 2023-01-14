@@ -44,6 +44,7 @@ async getCatesList(params) {
 		});
 		if (res.code === '2000') {
 			return res.data;
+      console.log('商品列表获取成功',res)
 		}
 		return [];
 	},

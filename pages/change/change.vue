@@ -14,27 +14,27 @@
       <view class="container03">
         <view class="container02" >
             <view class="scroll-H">
-              <uni-col :span="12" @tap='godetails()' >
+              <uni-col :span="12" @tap='godetails(index)' v-for="(item,index) in itemList" :key="item.id"  :data-itemid="(item.id)">
               	<view class="demo-uni-col light">
-                  <text>防疫口罩</text>
+                  <text>{{item.cateName}}</text>
                 </view>
               </uni-col>
-              <uni-col :span="12">
+              <!-- <uni-col :span="12">
               	<view class="demo-uni-col light">
                    <text>购物袋</text>
                 </view>
-              </uni-col>
-              <uni-col :span="12">
+              </uni-col> -->
+              <!-- <uni-col :span="12">
               	<view class="demo-uni-col light">
                    <text>兑换话费</text>
                 </view>
-              </uni-col>
-              <uni-col :span="12">
+              </uni-col> -->
+              <!-- <uni-col :span="12">
               	<view class="demo-uni-col light">
                    <text>优惠券</text>
                 </view>
-              </uni-col>
-            </image>
+              </uni-col> -->
+            
             </view>
        
       </view>
@@ -49,13 +49,19 @@
       return {
         url: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.uhbXYV8AJqA879-E_eHGDgHaC_?w=186&h=80&c=7&r=0&o=5&dpr=1.88&pid=1.7',
         avatar: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.VWRK3D4CN_uVkIhEsttI8wHaF2?w=246&h=194&c=7&r=0&o=5&dpr=1.88&pid=1.7',
+        itemList:[],
         
       }
     },
+    onLoad() {
+     this.getitemList();//获取商品列表
+      },
     methods: {
-      godetails(){
+      godetails(index){
+        console.log(this.itemList[index].id);
+        let goodsId=this.itemList[index].id;
         uni.navigateTo({
-          url:'../details/details'
+          url:'../details/details?id='+goodsId
         })
       },
       onClick(e) {
@@ -66,7 +72,12 @@
           title: text,
           icon: 'none'
         })
-      }
+      },
+    async  getitemList(){
+        this.itemList = await this.$api.getCatesList({cateType: 'goods'});
+        
+      },
+      
     },
   }
 </script>

@@ -74,13 +74,15 @@
         ]
       };
     },
-    onLoad() {
-    this.getGoodsList()
+    onLoad(option) {
+    this.getGoodsList(),
+    console.log(option.id,'商品详情页');
     },
     methods:{
      async getGoodsList(){
         this.CatesList = await this.$api.getCatesList({cateType: 'goods'});
       },
+      
       goBack(){
         uni.navigateBack({
           delta:1
