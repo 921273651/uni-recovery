@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 10/01/2023 16:19:46
+ Date: 16/01/2023 19:00:27
 */
 
 SET NAMES utf8mb4;
@@ -38,6 +38,7 @@ CREATE TABLE `tb_address`  (
 INSERT INTO `tb_address` VALUES (1, '6', '自己', 12345612312, '北京市海定区', '古北一号2栋', '1');
 INSERT INTO `tb_address` VALUES (2, '6', '妈咪', 13467834563, '上海市安福路', '3号楼菜鸟驿站', '0');
 INSERT INTO `tb_address` VALUES (3, '1', '汤臣一品业主', 2, '北京市-市辖区-西城区', '2', '0');
+INSERT INTO `tb_address` VALUES (4, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_goods
@@ -87,13 +88,24 @@ CREATE TABLE `tb_order`  (
   `good_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `address_id` decimal(10, 0) NULL DEFAULT NULL,
+  `order_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
-INSERT INTO `tb_order` VALUES (1, '2', '6', 2);
+INSERT INTO `tb_order` VALUES (1, '2', '6', 2, '0');
+INSERT INTO `tb_order` VALUES (2, '1', '1', 2, '1');
+INSERT INTO `tb_order` VALUES (3, '1', '1', 1, '1');
+INSERT INTO `tb_order` VALUES (4, '1', '1', 3, '1');
+INSERT INTO `tb_order` VALUES (5, '2', '1', 2, '1');
+INSERT INTO `tb_order` VALUES (6, '3', '1', 3, '1');
+INSERT INTO `tb_order` VALUES (7, '1', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (8, '3', '1', 2, '1');
+INSERT INTO `tb_order` VALUES (9, '2', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (10, '3', '1', 3, '1');
+INSERT INTO `tb_order` VALUES (11, '3', '1', NULL, '0');
 
 -- ----------------------------
 -- Table structure for tb_recycle
@@ -127,6 +139,26 @@ INSERT INTO `tb_recycle` VALUES (14, '旧电器', '6', 0.00);
 INSERT INTO `tb_recycle` VALUES (15, '旧家具', '5', 0.00);
 
 -- ----------------------------
+-- Table structure for tb_recycle_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_recycle_order`;
+CREATE TABLE `tb_recycle_order`  (
+  `orderId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `category_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `estimatedWeight` double NULL DEFAULT NULL,
+  `addressId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `callDate` datetime NULL DEFAULT NULL,
+  `callTime` datetime NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `orderType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`orderId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_recycle_order
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_user
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
@@ -139,7 +171,7 @@ CREATE TABLE `tb_user`  (
   `phoneNum` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`userId`) USING BTREE,
   UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tb_user
@@ -157,6 +189,7 @@ INSERT INTO `tb_user` VALUES (24, '2123', '2', NULL, NULL, NULL);
 INSERT INTO `tb_user` VALUES (25, '142', '2', NULL, NULL, NULL);
 INSERT INTO `tb_user` VALUES (26, '2121', '2', NULL, NULL, NULL);
 INSERT INTO `tb_user` VALUES (27, '333', '1', NULL, NULL, NULL);
+INSERT INTO `tb_user` VALUES (28, '55', '5', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_video
