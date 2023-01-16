@@ -66,7 +66,7 @@
       }
       )
       uni.navigateTo({
-        url:'../commit_order/commit_order?addressId='+addressId
+        url:'../commit_order/commit_order?addressId='+addressId+'&orderId='+this.orderId
       })
      }
     },

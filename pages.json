@@ -47,7 +47,7 @@
 			"path": "pages/order/order",
 			"style": {
 				"navigationBarTitleText": "订单",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 
 		}, {

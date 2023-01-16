@@ -87,6 +87,14 @@ const getCatesList = function(reqBody) {
   return sql;
 }
 
+//获取订单列表
+const getOrderList = function(reqBody, userId) {
+    const sql = `
+      SELECT * FROM tb_order left JOIN tb_address ON tb_order.address_id = tb_address.address_id where tb_order.user_id = ${userId};
+    `
+  return sql;
+}
+
 //生成订单
 const createOrder = function(reqBody, userId) {
   const {goodId} = reqBody;
@@ -98,6 +106,13 @@ const createOrder = function(reqBody, userId) {
 const selectAdress = function(reqBody) {
   const {orderId, addressId} = reqBody;
   const sql = `UPDATE tb_order SET address_id='${addressId}' where order_id = '${orderId}'`
+  return sql;
+}
+
+//提交订单
+const submitOrder = function(reqBody) {
+  const {orderId} = reqBody;
+  const sql = `UPDATE tb_order SET order_status='1' where order_id = '${orderId}'`
   return sql;
 }
 
@@ -193,5 +208,7 @@ module.exports = {
   getItemList,
   getInformation,
   createOrder,
-  selectAdress
+  selectAdress,
+  submitOrder,
+  getOrderList
 }
