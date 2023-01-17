@@ -19,6 +19,18 @@
 </template>
 
 <script>
+  export default{
+    data(){
+      return{
+        
+      }
+      
+    },
+    onShow() {
+    	wx.hideHomeButton();
+    },
+  }
+  
 </script>
 
 <style>

@@ -66,7 +66,14 @@
 			}
 
 		},
+ {
+			"path": "pages/confirm/confirm",
+			"style": {
+				"navigationBarTitleText": "下单",
+				"enablePullDownRefresh": false
+			}
 
+		},
 		{
 			"path": "pages/details/details",
 			"style": {

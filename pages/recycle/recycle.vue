@@ -179,9 +179,13 @@
       },
 	  
 	  async submit(type) {
+      uni.navigateTo({
+        url:'/pages/confirm/confirm'
+      })
 		  const res = await this.$api.orderRecycle({...this.formdata, orderType: type});
 		  console.log('formdata',this.formdata)
-	  }
+     
+	  },
     }
 
   }
