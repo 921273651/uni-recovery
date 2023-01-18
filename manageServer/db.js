@@ -90,7 +90,10 @@ const getCatesList = function(reqBody) {
 //获取订单列表
 const getOrderList = function(reqBody, userId) {
     const sql = `
-      SELECT * FROM tb_order left JOIN tb_address ON tb_order.address_id = tb_address.address_id where tb_order.user_id = ${userId};
+      SELECT * FROM tb_order 
+      left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
+      inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
+      where tb_order.user_id = ${userId};
     `
   return sql;
 }
@@ -102,10 +105,24 @@ const createOrder = function(reqBody, userId) {
   return sql;
 }
 
+//生成回收订单
+const createRecycleOrder = function(reqBody, userId) {
+  const {category_id} = reqBody;
+  const sql = `INSERT into tb_recycle_order (user_id,category_id) values('${userId}','${category_id}');`
+  return sql;
+}
+
 //选择地址
 const selectAdress = function(reqBody) {
   const {orderId, addressId} = reqBody;
   const sql = `UPDATE tb_order SET address_id='${addressId}' where order_id = '${orderId}'`
+  return sql;
+}
+
+//选择回收地址
+const selectRecycleAddress = function(reqBody) {
+  const {orderId, addressId} = reqBody;
+  const sql = `UPDATE tb_recycle_order SET address_id='${addressId}' where order_id = '${orderId}'`
   return sql;
 }
 
@@ -116,21 +133,28 @@ const submitOrder = function(reqBody) {
   return sql;
 }
 
+//确认收货
+const checkOrder = function(reqBody) {
+  const {orderId} = reqBody;
+  const sql = `UPDATE tb_order SET order_status='2' where order_id = '${orderId}'`
+  return sql;
+}
+
 //获取地址表数据
-const getAddress = function(reqBody) {
+const getAddress = function(reqBody, userId) {
   const {addressId} = reqBody;
   let sql = `
         select
             *
         from
             tb_address
-        ${addressId?'where address_id ='+addressId:''}
+        where user_id=${userId} ${addressId?'and address_id ='+addressId:''}
         `;
   return sql;
 }
 
 //插入地址数据
-const getInsertAddress = function(reqBody) {
+const getInsertAddress = function(reqBody, userId) {
   const {
     address_username,
     address_phoneNumber,
@@ -140,8 +164,8 @@ const getInsertAddress = function(reqBody) {
   } = reqBody;
   const sql = `
         INSERT into 
-        tb_address (address_username,address_phoneNumber,address_city,address_information,address_default) 
-        values('${address_username}','${address_phoneNumber}','${address_city}','${address_information}','${address_default}');
+        tb_address (user_id,address_username,address_phoneNumber,address_city,address_information,address_default) 
+        values('${userId}','${address_username}','${address_phoneNumber}','${address_city}','${address_information}','${address_default}');
         `;
   return sql;
 }
@@ -170,7 +194,6 @@ const getInformation = function(reqBody) {
 }
 
 // 获取测试数据
-
 // const getTest = function (userId) {
 //   const sql = `
 //         select
@@ -182,6 +205,7 @@ const getInformation = function(reqBody) {
 //         `;
 //   return sql;
 // }
+
 //添加计划事务
 // const addTaskData = function (reqBody) {
 //   const { planId, userId, detail, type, plan, startTime } = reqBody
@@ -210,5 +234,8 @@ module.exports = {
   createOrder,
   selectAdress,
   submitOrder,
-  getOrderList
+  getOrderList,
+  checkOrder,
+  createRecycleOrder,
+  selectRecycleAddress
 }

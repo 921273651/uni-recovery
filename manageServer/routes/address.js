@@ -4,7 +4,8 @@ const db = require('../db.js');
 
 //获取地址接口
 router.get('/getAddress', (req, res) => {
-    let sql = db.getAddress(req.query);
+    const userId = req.header('token');
+    let sql = db.getAddress(req.query, userId);
     console.log('sql', sql);
     db.Query(sql).then(data => {
       if (data) {
@@ -19,7 +20,8 @@ router.get('/getAddress', (req, res) => {
   
   //修改
  router.post('/getInsertAddress', (req, res) => {
-   let sql = db.getInsertAddress(req.body);
+  const userId = req.header('token');
+   let sql = db.getInsertAddress(req.body,userId);
    console.log('sql', sql);
    db.Query(sql).then(data => {
      if (data) {

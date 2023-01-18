@@ -36,19 +36,22 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
   export default {
     data() {
       return {
-        addressList:[],
         cityName:"请选择 >",
         pickerValueDefault:[0,0,1],
         address_name: '', 
         address_phoneNumber: '', 
         address_city: '', 
         address_information: '2', 
-        address_default: 0
+        address_default: 0,
+		orderId:''
       };
     },
     components:{
       mpvueCityPicker
     },
+	onLoad(option) {
+		this.orderId = option.orderId;
+	},
     onShow(){
         wx.hideHomeButton();//消除返回首页按钮
       },
@@ -77,10 +80,19 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
               address_default:this.address_default
             }
           );
-          console.log(1,res)
           if(res) {
-            this.addressList=res.data;
-            console.log('address', this.addressList)
+            uni.showToast({
+            	title: '地址新增成功！',
+            	icon: 'success',
+            	duration: 500,
+				success: () => {
+					setTimeout(() => {
+						uni.navigateTo({
+							url: `/pages/address/address?orderId=${this.orderId}`
+						})
+					}, 500)
+				}
+            })
           }
         }
       }

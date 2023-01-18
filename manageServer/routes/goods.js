@@ -86,6 +86,23 @@ router.post('/submitOrder', (req, res) => {
   })
 })
 
+router.post('/checkOrder', (req, res) => {
+  let sql = db.checkOrder(req.body);
+
+  db.Query(sql).then(data => {
+    console.log('data', data);
+    if (data) {
+      console.log('确认收货成功！');
+      res.send({ "code": "2000", "data": data, "message": "确认收货成功！" });
+    } else {
+      res.send({ "code": "400", "message": "确认收货失败！" });
+    }
+  }, err => {
+    console.log('err', err);
+    res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
+  })
+})
+
 
 
 console.log('goods接口就绪');
