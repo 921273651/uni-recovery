@@ -90,6 +90,19 @@ export default {
 		return null;
 	},
 	
+	//获取回收订单列表
+	async getRecycleOrderList(params) {
+		const res = await fetch.request({
+			url: 'recycle/getRecycleOrderList',
+			method: 'POST',
+			data: params
+		});
+		if (res.code === '2000') {
+			return res.data;
+		}
+		return [];
+	},
+	
 	//提交订单
 	async submitOrder(params) {
 		const res = await fetch.request({
@@ -108,6 +121,19 @@ export default {
 	async checkOrder(params) {
 		const res = await fetch.request({
 			url: 'goods/checkOrder',
+			method: 'POST',
+			data: params
+		})
+		if (res.code === '2000') {
+			return res;
+		}
+		return null;
+	},
+
+	//确认回收
+	async checkRecycle(params) {
+		const res = await fetch.request({
+			url: 'recycle/checkRecycle',
 			method: 'POST',
 			data: params
 		})
@@ -165,9 +191,9 @@ export default {
 		return null;
 	},
 
-	async orderRecycle(params) {
+	async submitRecycleOrder(params) {
 		const res = await fetch.request({
-			url: 'recycle/orderRecycle',
+			url: 'recycle/submitRecycleOrder',
 			method: 'POST',
 			data: params
 		});

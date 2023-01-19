@@ -23,39 +23,25 @@
 		<!-- 价格展示结束 -->
 
 		<!-- 详细信息开始 -->
-		<view class="form" v-if="isCreated">
+		<view class="form">
 			<view class="top">
-				<span>预估重量({{idToName[category_id-1]}})：</span><input type="text"
-					v-model="formdata.weightList[category_id-1]" style="width: 300rpx;" placeholder="单位为公斤" />
+				<span>预估重量({{idToName[category_id-1]}})：</span><input type="number" :disabled="orderStatus!=='0'"
+					v-model="weightList[category_id-1]" style="width: 300rpx;" placeholder="单位为公斤" />
 			</view>
 			<view class="center">
 				<view class="address">
 					<view class="iconfont icon-dingwei"></view>
 					<text>预约地址：</text>
-					<button @click="gotoAddress">从地址簿选择</button>
+					<button @click="gotoAddress" :disabled="orderStatus!=='0'">从地址簿选择</button>
 				</view>
-<!-- 				<view >
-					<view class="top">
-						<text>真实姓名：</text>
-						<input type="text" v-model="formdata.realName" />
-					</view>
-					<view class="top">
-						<text>上门地址：</text>
-						<input type="text" v-model="formdata.address" />
-					</view>
-					<view class="top">
-						<text>手机号码：</text>
-						<input type="text" v-model="formdata.cellPhone" />
-					</view>
-				</view> -->
-				<view class="address-info-box" v-if="isShowAddress" @click="pickAddress">
+				<view class="address-info-box">
 					<view class="row1">
 						<view class="row1-left">
-							<view class="username">收货人:{{address.address_username}} </view>
+							<view class="username">收货人:{{formdata.address_username || ''}} </view>
 						</view>
 						<view class="row1-right">
-							<view class="phone">电话：{{address.address_phoneNumber}}</view>
-							<uni-icons type="arrowright" size=16></uni-icons>
+							<view class="phone">电话：{{formdata.address_phoneNumber || ''}}</view>
+							<!-- <uni-icons type="arrowright" size=16></uni-icons> -->
 						</view>
 					</view>
 					<view class="row2">
@@ -63,53 +49,52 @@
 							收货地址：
 						</view>
 						<view class="row2-right">
-							{{address.address_city}}{{address.address_information}}
+							{{formdata.address_city || ''}}{{formdata.address_information || ''}}
 						</view>
 					</view>
 				</view>
 			</view>
-
-			<view class="top">
-				<view class="uni-title uni-common-pl">预约上门日期：</view>
-				<view class="uni-list">
-					<view class="uni-list-cell">
-						<view class="uni-list-cell-db">
-							<picker mode="date" :value="formdata.date" @change="bindDateChange">
-								<view class="uni-input">{{formdata.date || '请选择'}}</view>
-							</picker>
+			<view>
+				<view class="top">
+					<view class="uni-title uni-common-pl">预约上门日期：</view>
+					<view class="uni-list">
+						<view class="uni-list-cell">
+							<view class="uni-list-cell-db">
+								<picker mode="date" :value="formdata.call_date" @change="bindDateChange" :disabled="orderStatus!=='0'">
+									<view class="uni-input">{{formdata.call_date || '请选择'}}</view>
+								</picker>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<view class="top">
-				<view class="uni-title uni-common-pl">预约上门时间：</view>
-				<view class="uni-list">
-					<view class="uni-list-cell">
-						<view class="uni-list-cell-db">
-							<picker mode="time" :value="formdata.time" start="09:01" end="21:01"
-								@change="bindTimeChange">
-								<view class="uni-input">{{formdata.time || '请选择'}}</view>
-							</picker>
+				<view class="top">
+					<view class="uni-title uni-common-pl">预约上门时间：</view>
+					<view class="uni-list">
+						<view class="uni-list-cell">
+							<view class="uni-list-cell-db">
+								<picker mode="time" :value="formdata.call_time" start="09:01" end="21:01"
+									@change="bindTimeChange" :disabled="orderStatus!=='0'">
+									<view class="uni-input">{{formdata.call_time || '请选择'}}</view>
+								</picker>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-			<view class="beizhu">备注：</view>
-			<view class="top">
-				<textarea v-model="formdata.remark" placeholder="请输入" />
+				<view class="beizhu">备注：</view>
+				<view class="top">
+					<textarea v-model="formdata.remark" placeholder="请输入" :disabled="orderStatus!=='0'" />
+				</view>
 			</view>
 		</view>
 		<!-- 详细信息结束 -->
 
 		<!-- 按钮开始 -->
-		<view class="button-group" v-if="isCreated">
+		<view class="button-group" v-if="orderStatus==='0'">
 			<button type="primary" plain="true" @click="submit(1)">公益捐赠</button>
 			<button type="primary" plain="true" @click="submit(2)">确定下单</button>
 		</view>
 		<!-- 按钮结束 -->
-		<div>
-			<button type="default" v-if="!isCreated" @click="createRecycleOrder()">预约上门回收</button>
-		</div>
+		
 
 	</view>
 </template>
@@ -118,18 +103,11 @@
 	export default {
 		data() {
 			return {
-				formdata: {
-					weightList: [],
-					realName: '',
-					address: '',
-					cellPhone: '',
-					time: '',
-					date: '',
-					remark: ''
-				},
-				isCreated: false,
-				isShowAddress: false,
+				formdata: {},
+				weightList: [],
+				isLoading: true,
 				orderId: '',
+				orderStatus: '0',
 				addressId: '',
 				address: {},
 				category_id: 1,
@@ -147,32 +125,29 @@
 			}
 		},
 
-		onLoad(option) {
-			this.getcateList();
-			this.checkIsCreated();
-			
-			this.getAddress();
-			// console.log(option.id,'回收页');
-			// this.category_id=option.id;
-
-
+		async onLoad(option) {
+			this.isLoading = true;
+			this.orderId = option.orderId;
+			this.orderStatus = option.orderStatus;
+			await this.getcateList();
+			await this.getOrderList({orderId: this.orderId});
+			this.isLoading = false;
+		},
+		async onShow() {
+			if(!this.isLoading){
+				const res = await this.$api.getRecycleOrderList({orderId: this.orderId});
+				this.formdata.address_username = res[0].address_username;
+				this.formdata.address_phoneNumber = res[0].address_phoneNumber;
+				this.formdata.address_city = res[0].address_city;
+				this.formdata.address_information = res[0].address_information;
+			}
 		},
 		methods: {
-			//是否有待填写订单
-			async checkIsCreated() {
-				const res = await this.$api.checkIsCreated();
-				if (res) {
-					this.isCreated = true;
-					this.addressId = res.address_id;
-				}
-			},
-			
-			async getAddress() {
-				const res = await this.$api.getAddressList({
-					addressId: this.addressId
-				});
-				if (res) {
-					this.address = res[0];
+			async getOrderList(params) {
+				const res = await this.$api.getRecycleOrderList(params);
+				if(res) {
+					this.formdata = res[0];
+					this.weightList = res[0].estimated_weight.split(',');
 				}
 			},
 
@@ -209,41 +184,16 @@
 				})
 			},
 
-			createRecycleOrder() {
-				uni.showModal({
-					title: '提示',
-					content: '是否生成回收订单 ？',
-					success: async (res) => {
-						if (res.confirm) {
-							console.log('用户点击确定')
-							const res1 = await this.$api.createRecycleOrder({
-								category_id: this.category_id
-							})
-							if (res1) {
-								uni.showToast({
-									title: '成功生成订单~',
-									icon: 'success',
-									duration: 1000
-								})
-								this.orderId = res1.insertId;
-							}
-						} else {
-							console.log('用户点击取消')
-						}
-					}
-				})
-			},
-
 			//时间选择器
 			bindPickerChange: function(e) {
 				console.log('picker发送选择改变，携带值为', e.detail.value)
 				this.index = e.detail.value
 			},
 			bindTimeChange: function(e) {
-				this.formdata.time = e.detail.value
+				this.formdata.call_time = e.detail.value
 			},
 			bindDateChange: function(e) {
-				this.formdata.date = e.detail.value
+				this.formdata.call_date = e.detail.value
 			},
 			//从index找到对应的分类id，方便后续传值
 			pick(index) {
@@ -255,7 +205,8 @@
 			},
 
 			async submit(type) {
-				const res = await this.$api.orderRecycle({
+				this.formdata.estimated_weight = this.weightList.join(',');
+				const res = await this.$api.submitRecycleOrder({
 					...this.formdata,
 					orderType: type
 				});
@@ -263,7 +214,7 @@
 			},
 			gotoAddress() {
 				uni.navigateTo({
-					url: `/pages/address/address?orderId=${orderId}&fromPath=recycle`
+					url: `/pages/address/address?orderId=${this.orderId}&fromPath=recycle`
 				})
 			}
 		}
@@ -272,6 +223,50 @@
 </script>
 
 <style lang="scss" scoped>
+	.address-info-box {
+		border: 1px solid red;
+		margin: auto;
+		font-size: 12px;
+		height: 90px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0 5px;
+	
+		.row1 {
+			display: flex;
+			justify-content: space-between;
+	
+			.row1-right {
+				display: flex;
+				justify-content: space-between;
+	
+				.phone {}
+			}
+	
+			.row1-left {
+				.username {}
+			}
+		}
+	
+		.row2 {
+			display: flex;
+	
+			align-items: center;
+			margin-top: 10px;
+	
+			.row2-left {
+				white-space: nowrap;
+			}
+	
+			.row2-right {}
+		}
+	
+		.address-choose-box {
+			text-align: center;
+		}
+	
+	}
 	.iconfont {
 		font-size: 100rpx;
 	}

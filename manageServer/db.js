@@ -12,12 +12,12 @@ let pool = mysql.createPool({
 })
 
 let Query = (sql, ...params) => {
-  return new Promise(function(resolve, reject) {
-    pool.getConnection(function(err, connection) {
+  return new Promise(function (resolve, reject) {
+    pool.getConnection(function (err, connection) {
       if (err) {
         return reject(err);
       }
-      connection.query(sql, params, function(error, res) {
+      connection.query(sql, params, function (error, res) {
         // console.log(res);
         pool.releaseConnection(connection)
         if (error) {
@@ -33,7 +33,7 @@ let Query = (sql, ...params) => {
  * sql语句
  * */
 //登录验证
-const login = function(reqBody) {
+const login = function (reqBody) {
   const {
     cellphone,
     password,
@@ -50,7 +50,7 @@ const login = function(reqBody) {
 }
 
 //注册用户
-const register = function(reqBody) {
+const register = function (reqBody) {
   const {
     cellphone,
     password,
@@ -61,7 +61,7 @@ const register = function(reqBody) {
 }
 
 //获取用户列表
-const getTest = function(userId) {
+const getTest = function (userId) {
   const sql = `
         select
             *
@@ -73,23 +73,23 @@ const getTest = function(userId) {
   return sql;
 }
 //获取商品列表
-const getCatesList = function(reqBody) {
+const getCatesList = function (reqBody) {
   let sql = '';
-  const {cateType, goodId} = reqBody;
-    sql = `
+  const { cateType, goodId } = reqBody;
+  sql = `
           select
               *
           from
               tb_${cateType}
-          ${goodId?"where id="+goodId:""}
+          ${goodId ? "where id=" + goodId : ""}
           `;
 
   return sql;
 }
 
 //获取订单列表
-const getOrderList = function(reqBody, userId) {
-    const sql = `
+const getOrderList = function (reqBody, userId) {
+  const sql = `
       SELECT * FROM tb_order 
       left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
       inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
@@ -99,62 +99,99 @@ const getOrderList = function(reqBody, userId) {
 }
 
 //生成订单
-const createOrder = function(reqBody, userId) {
-  const {goodId} = reqBody;
+const createOrder = function (reqBody, userId) {
+  const { goodId } = reqBody;
   const sql = `INSERT into tb_order (user_id,good_id) values('${userId}','${goodId}');`
   return sql;
 }
 
 //生成回收订单
-const createRecycleOrder = function(reqBody, userId) {
-  const {category_id} = reqBody;
-  const sql = `INSERT into tb_recycle_order (user_id,category_id) values('${userId}','${category_id}');`
+const createRecycleOrder = function (reqBody, userId) {
+  const sql = `INSERT into tb_recycle_order (user_id) values('${userId}');`
   return sql;
 }
 
 //选择地址
-const selectAdress = function(reqBody) {
-  const {orderId, addressId} = reqBody;
+const selectAdress = function (reqBody) {
+  const { orderId, addressId } = reqBody;
   const sql = `UPDATE tb_order SET address_id='${addressId}' where order_id = '${orderId}'`
   return sql;
 }
 
 //选择回收地址
-const selectRecycleAddress = function(reqBody) {
-  const {orderId, addressId} = reqBody;
+const selectRecycleAddress = function (reqBody) {
+  const { orderId, addressId } = reqBody;
   const sql = `UPDATE tb_recycle_order SET address_id='${addressId}' where order_id = '${orderId}'`
   return sql;
 }
 
 //提交订单
-const submitOrder = function(reqBody) {
-  const {orderId} = reqBody;
+const submitOrder = function (reqBody) {
+  const { orderId } = reqBody;
   const sql = `UPDATE tb_order SET order_status='1' where order_id = '${orderId}'`
   return sql;
 }
 
+//提交回收订单
+const submitRecycleOrder = function (reqBody) {
+  const { order_id, estimated_weight, call_date, call_time, remark, orderType } = reqBody;
+  const sql = 
+  `UPDATE 
+    tb_recycle_order 
+   SET 
+    order_status='1',
+    estimated_weight='${estimated_weight}',
+    call_date='${call_date}',
+    call_time='${call_time}',
+    remark='${remark}',
+    order_type='${orderType}'
+    where order_id = '${order_id}'`
+  return sql;
+}
+
+// 获取回收订单列表
+const getRecycleOrderList = function (reqBody, userId) {
+  const { orderId } = reqBody;
+  let sql = `
+        select
+            *
+        from
+            tb_recycle_order
+        left JOIN tb_address ON tb_recycle_order.address_id = tb_address.address_id 
+        where tb_recycle_order.user_id=${userId} ${orderId ? 'and tb_recycle_order.order_id =' + orderId : ''}
+        `;
+  return sql;
+}
+
 //确认收货
-const checkOrder = function(reqBody) {
-  const {orderId} = reqBody;
+const checkOrder = function (reqBody) {
+  const { orderId } = reqBody;
   const sql = `UPDATE tb_order SET order_status='2' where order_id = '${orderId}'`
   return sql;
 }
 
+//确认回收
+const checkRecycle = function (reqBody) {
+  const { orderId } = reqBody;
+  const sql = `UPDATE tb_recycle_order SET order_status='2' where order_id = '${orderId}'`
+  return sql;
+}
+
 //获取地址表数据
-const getAddress = function(reqBody, userId) {
-  const {addressId} = reqBody;
+const getAddress = function (reqBody, userId) {
+  const { addressId } = reqBody;
   let sql = `
         select
             *
         from
             tb_address
-        where user_id=${userId} ${addressId?'and address_id ='+addressId:''}
+        where user_id=${userId} ${addressId ? 'and address_id =' + addressId : ''}
         `;
   return sql;
 }
 
 //插入地址数据
-const getInsertAddress = function(reqBody, userId) {
+const getInsertAddress = function (reqBody, userId) {
   const {
     address_username,
     address_phoneNumber,
@@ -170,7 +207,7 @@ const getInsertAddress = function(reqBody, userId) {
   return sql;
 }
 //获取分类列表
-const getItemList = function() {
+const getItemList = function () {
   let sql = `
         select
             *
@@ -180,7 +217,7 @@ const getItemList = function() {
   return sql;
 }
 //获取分类列表下详细信息
-const getInformation = function(reqBody) {
+const getInformation = function (reqBody) {
   console.log('reqBody11', reqBody)
   let sql = `
         select
@@ -237,5 +274,8 @@ module.exports = {
   getOrderList,
   checkOrder,
   createRecycleOrder,
-  selectRecycleAddress
+  selectRecycleAddress,
+  getRecycleOrderList,
+  submitRecycleOrder,
+  checkRecycle
 }

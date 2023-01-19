@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 16/01/2023 19:00:27
+ Date: 19/01/2023 16:46:39
 */
 
 SET NAMES utf8mb4;
@@ -30,15 +30,19 @@ CREATE TABLE `tb_address`  (
   `address_information` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `address_default` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`address_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tb_address
 -- ----------------------------
-INSERT INTO `tb_address` VALUES (1, '6', '自己', 12345612312, '北京市海定区', '古北一号2栋', '1');
-INSERT INTO `tb_address` VALUES (2, '6', '妈咪', 13467834563, '上海市安福路', '3号楼菜鸟驿站', '0');
+INSERT INTO `tb_address` VALUES (1, '1', '自己', 12345612312, '北京市海定区', '古北一号2栋', '1');
+INSERT INTO `tb_address` VALUES (2, '1', '妈咪', 13467834563, '上海市安福路', '3号楼菜鸟驿站', '0');
 INSERT INTO `tb_address` VALUES (3, '1', '汤臣一品业主', 2, '北京市-市辖区-西城区', '2', '0');
-INSERT INTO `tb_address` VALUES (4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_address` VALUES (7, '1', '66', 6, '北京市-市辖区-西城区', '23', '0');
+INSERT INTO `tb_address` VALUES (8, '1', '77', 7, '北京市-市辖区-西城区', '277', '0');
+INSERT INTO `tb_address` VALUES (9, '1', 'ttw', 22, '北京市-市辖区-西城区', '221', '0');
+INSERT INTO `tb_address` VALUES (10, '1', '213', 213, '北京市-市辖区-西城区', '2', '0');
+INSERT INTO `tb_address` VALUES (11, '1', 'gg', 1, '北京市-市辖区-西城区', '2', '0');
 
 -- ----------------------------
 -- Table structure for tb_goods
@@ -90,22 +94,36 @@ CREATE TABLE `tb_order`  (
   `address_id` decimal(10, 0) NULL DEFAULT NULL,
   `order_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
 INSERT INTO `tb_order` VALUES (1, '2', '6', 2, '0');
-INSERT INTO `tb_order` VALUES (2, '1', '1', 2, '1');
-INSERT INTO `tb_order` VALUES (3, '1', '1', 1, '1');
-INSERT INTO `tb_order` VALUES (4, '1', '1', 3, '1');
+INSERT INTO `tb_order` VALUES (2, '1', '1', 2, '2');
+INSERT INTO `tb_order` VALUES (3, '1', '1', 1, '2');
+INSERT INTO `tb_order` VALUES (4, '1', '1', 3, '2');
 INSERT INTO `tb_order` VALUES (5, '2', '1', 2, '1');
 INSERT INTO `tb_order` VALUES (6, '3', '1', 3, '1');
-INSERT INTO `tb_order` VALUES (7, '1', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (7, '1', '1', 2, '1');
 INSERT INTO `tb_order` VALUES (8, '3', '1', 2, '1');
-INSERT INTO `tb_order` VALUES (9, '2', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (9, '2', '1', 1, '1');
 INSERT INTO `tb_order` VALUES (10, '3', '1', 3, '1');
-INSERT INTO `tb_order` VALUES (11, '3', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (11, '3', '1', 1, '2');
+INSERT INTO `tb_order` VALUES (12, '3', '1', 2, '1');
+INSERT INTO `tb_order` VALUES (13, '3', '1', 7, '2');
+INSERT INTO `tb_order` VALUES (14, '3', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (15, '3', '1', 7, '0');
+INSERT INTO `tb_order` VALUES (16, '3', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (17, '1', '1', 8, '0');
+INSERT INTO `tb_order` VALUES (18, '1', '1', 1, '1');
+INSERT INTO `tb_order` VALUES (19, '1', '1', 7, '0');
+INSERT INTO `tb_order` VALUES (20, '1', '1', 8, '1');
+INSERT INTO `tb_order` VALUES (21, '2', '1', 3, '1');
+INSERT INTO `tb_order` VALUES (22, '1', '1', 3, '0');
+INSERT INTO `tb_order` VALUES (23, '1', '1', NULL, '0');
+INSERT INTO `tb_order` VALUES (24, '2', '1', 10, '2');
+INSERT INTO `tb_order` VALUES (25, '3', '1', 7, '2');
 
 -- ----------------------------
 -- Table structure for tb_recycle
@@ -143,20 +161,24 @@ INSERT INTO `tb_recycle` VALUES (15, '旧家具', '5', 0.00);
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_recycle_order`;
 CREATE TABLE `tb_recycle_order`  (
-  `orderId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `category_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `estimatedWeight` double NULL DEFAULT NULL,
-  `addressId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `callDate` datetime NULL DEFAULT NULL,
-  `callTime` datetime NULL DEFAULT NULL,
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `category_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1,2,3,4,5,6',
+  `estimated_weight` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0,0,0,0,0,0',
+  `address_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `call_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `call_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `orderType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`orderId`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `order_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0',
+  `order_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_recycle_order
 -- ----------------------------
+INSERT INTO `tb_recycle_order` VALUES (6, '1', '1,2,3,4,5,6', '10,0,30,0,0,0', '9', '2023-01-19', '09:01', '13', '2', '2');
+INSERT INTO `tb_recycle_order` VALUES (7, '1', '1,2,3,4,5,6', '01,0,04,0,0,0', '1', '2023-01-19', '00:00', '214', '2', '1');
 
 -- ----------------------------
 -- Table structure for tb_user

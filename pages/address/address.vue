@@ -42,9 +42,9 @@
 			this.fromPath = option.fromPath;
 			console.log('地址页', option);
 			this.orderId = option.orderId;
-			this.getAddressList();
 		},
 		onShow() {
+			this.getAddressList();
 			wx.hideHomeButton(); //消除返回首页按钮
 		},
 		methods: {
@@ -58,9 +58,9 @@
 				this.addressList = await this.$api.getAddressList();
 			},
 
-			selectAddress(addressId) {
+			async selectAddress(addressId) {
 				if (this.fromPath === 'goods') {
-					const res = this.$api.selectAddress({
+					const res = await this.$api.selectAddress({
 						orderId: this.orderId,
 						addressId: addressId,
 					})
@@ -68,13 +68,14 @@
 						url: '../commit_order/commit_order?addressId=' + addressId + '&orderId=' + this.orderId
 					})
 				} else if (this.fromPath === 'recycle') {
-					const res = this.$api.selectRecycleAddress({
+					const res = await this.$api.selectRecycleAddress({
 						orderId: this.orderId,
 						addressId: addressId,
 					})
-					uni.navigateTo({
-						url: '/pages/recycle/recycle?addressId=' + addressId + '&orderId=' + this.orderId
-					})
+					// uni.navigateTo({
+					// 	url: '/pages/recycle/recycle?orderId=' + this.orderId
+					// })
+					uni.navigateBack();
 				}
 			}
 			

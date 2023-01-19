@@ -87,9 +87,10 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
             	duration: 500,
 				success: () => {
 					setTimeout(() => {
-						uni.navigateTo({
-							url: `/pages/address/address?orderId=${this.orderId}`
-						})
+						// uni.navigateTo({
+						// 	url: `/pages/address/address?orderId=${this.orderId}`
+						// })
+						uni.navigateBack()
 					}, 500)
 				}
             })
