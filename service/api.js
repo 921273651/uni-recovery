@@ -37,7 +37,6 @@ export default {
 	},
 
 	//选择收货地址
-
 	async selectAddress(params) {
 		const res = await fetch.request({
 			url: 'goods/selectAdress',
@@ -49,6 +48,20 @@ export default {
 		}
 		return [];
 	},
+	
+	//选择回收订单收货地址
+	async selectRecycleAddress(params) {
+		const res = await fetch.request({
+			url: 'recycle/selectRecycleAddress',
+			method: 'POST',
+			data: params
+		});
+		if (res.code === '2000') {
+			return res.data;
+		}
+		return [];
+	},
+	
 	//生成订单
 	async creatOrder(params) {
 		console.log('params123', params)
@@ -58,6 +71,32 @@ export default {
 			data: params
 		});
 		console.log('params123', res)
+		if (res.code === '2000') {
+			return res.data;
+		}
+		return [];
+	},
+	
+	//生成回收订单
+	async createRecycleOrder(params) {
+		const res = await fetch.request({
+			url: 'recycle/createRecycleOrder',
+			method: 'POST',
+			data: params
+		});
+		if (res.code === '2000') {
+			return res;
+		}
+		return null;
+	},
+	
+	//获取回收订单列表
+	async getRecycleOrderList(params) {
+		const res = await fetch.request({
+			url: 'recycle/getRecycleOrderList',
+			method: 'POST',
+			data: params
+		});
 		if (res.code === '2000') {
 			return res.data;
 		}
@@ -74,6 +113,32 @@ export default {
 		console.log('params123', res)
 		if (res.code === '2000') {
 			return res.data;
+		}
+		return null;
+	},
+	
+	//确认收货
+	async checkOrder(params) {
+		const res = await fetch.request({
+			url: 'goods/checkOrder',
+			method: 'POST',
+			data: params
+		})
+		if (res.code === '2000') {
+			return res;
+		}
+		return null;
+	},
+
+	//确认回收
+	async checkRecycle(params) {
+		const res = await fetch.request({
+			url: 'recycle/checkRecycle',
+			method: 'POST',
+			data: params
+		})
+		if (res.code === '2000') {
+			return res;
 		}
 		return null;
 	},
@@ -126,9 +191,9 @@ export default {
 		return null;
 	},
 
-	async orderRecycle(params) {
+	async submitRecycleOrder(params) {
 		const res = await fetch.request({
-			url: 'recycle/orderRecycle',
+			url: 'recycle/submitRecycleOrder',
 			method: 'POST',
 			data: params
 		});

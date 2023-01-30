@@ -27,7 +27,9 @@
 				<view class="denglu">
 					<button class="btn-dl" type="primary" @click="login">登录</button>
 				</view>
-
+        <view class="control">
+        	<button class="btn-dl" type="primary" size="mini" @click="manage">管理员登录</button>
+        </view>
 				<!-- 协议区 -->
 				<view class="xieyi">
 					<checkbox-group @change="checked = !checked;">
@@ -37,7 +39,7 @@
 				</view>
 			</view>
 
-			<!-- 其他登录方式 -->
+			
 
 
 		</view>
@@ -173,7 +175,7 @@
 			}
 
 			.phoneCs {
-				margin-top: 200rpx;
+				margin-top: 170rpx;
 				margin-left: 35rpx;
 				position: absolute;
 				display: flex;
@@ -197,7 +199,7 @@
 			}
 
 			.passwordCs {
-				margin-top: 300rpx;
+				margin-top: 270rpx;
 				margin-left: 35rpx;
 				position: absolute;
 				display: flex;
@@ -224,7 +226,7 @@
 				font-size: 25rpx;
 				margin-left: 85rpx;
 				width: 370rpx;
-				margin-top: 440rpx;
+				margin-top: 410rpx;
 				position: absolute;
 				display: flex;
 				justify-content: space-between;
@@ -234,7 +236,7 @@
 				width: 350rpx;
 				height: 80rpx;
 				position: absolute;
-				margin-top: 500rpx;
+				margin-top: 470rpx;
 				margin-left: 85rpx;
 
 				button {
@@ -246,10 +248,26 @@
 					border-radius: 30rpx;
 				}
 			}
+      .control{
+        width: 200rpx;
+        height: 50rpx;
+        position: absolute;
+        margin-top: 570rpx;
+        margin-left: 155rpx;
+        
+        button {
+        	padding: 0rpx;
+        	line-height: 50rpx;
+        	font-size: 20rpx;
+        	width: 100%;
+        	height: 100%;
+        	// border-radius: 30rpx;
+        }
+      }
 
 			.xieyi {
 				margin-left: 10rpx;
-				margin-top: 600rpx;
+				margin-top: 650rpx;
 				width: 400rpx;
 				display: flex;
 				position: absolute;

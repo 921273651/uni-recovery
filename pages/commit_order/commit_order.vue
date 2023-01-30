@@ -33,7 +33,7 @@
 								收货地址：
 							</view>
 							<view class="row2-right">
-								{{address.address_information}}
+								{{address.address_city}}{{address.address_information}}
 							</view>
 						</view>
 					</view>
@@ -104,7 +104,7 @@
 			pickAddress() {
 				if (this.orderStatus === '0') {
 					uni.navigateTo({
-						url: `/pages/address/address?orderId=${this.orderId}`
+						url: `/pages/address/address?orderId=${this.orderId}&fromPath=goods`
 					})
 				}
 			},
