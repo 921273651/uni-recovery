@@ -210,6 +210,11 @@
 					...this.formdata,
 					orderType: type
 				});
+       uni.showToast({
+       	title: '成功下单~',
+       	icon: 'success',
+       	duration: 1000
+       })
 				console.log('formdata', this.formdata)
 			},
 			gotoAddress() {

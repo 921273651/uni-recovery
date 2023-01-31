@@ -32,8 +32,9 @@
   <view class="example-body">
   				<uni-row class="demo-uni-row" :width="nvueWidth">
   					<uni-col :span="12" v-for="(item,index) in itemList" :key="item.id"  :data-itemid="(item.id)" >
-  						<view class="demo-uni-col light" @click="goItem(index)">
-                <text>{{item.category}}</text>
+  						<view class="demo-uni-col light" @click="goItem(index)" >
+               <image class="item-bg" :src="item.background" alt="">
+                <text class="cate">{{item.category}}</text>
               </view>
   					</uni-col>
   					
@@ -150,6 +151,7 @@
     .demo-uni-row {
     		margin-bottom: 10px;
     
+   
     		// 组件在小程序端display为inline
     		// QQ、字节小程序文档写有 :host，但实测不生效
     		// 百度小程序没有 :host
@@ -162,6 +164,11 @@
           margin: 20rpx 20rpx 20rpx 20rpx;
             padding:10rpx;
       		border-radius: 5px;
+        position:relative;
+         .cate{
+           // float:left;
+          position:absolute;
+         }
       	}
       
       	.dark_deep {
@@ -169,14 +176,20 @@
       	}
   
       	.light {
-      		background-color: #e5e9f2;
+      		 // background-color:#8FBC8F ;
           margin-bottom: 10rpx;
         
       	}
         ::v-deep .uni-row {
         		margin-bottom: 5px;
         	}
-          
+          .item-bg{
+            // float: left;
+            position: absolute;
+            border-radius: 5px;
+           height: 80px;
+           width:100%;
+          }
           // 活动中心
           
           .cate-box {

@@ -8,6 +8,7 @@ export default {
 
 		});
 		if (res.code === '2000') {
+      console.log(res.data,'分类列表接口返回值')
 			return res.data;
 		}
 		return [];
@@ -85,6 +86,7 @@ export default {
 			data: params
 		});
 		if (res.code === '2000') {
+     
 			return res;
 		}
 		return null;
