@@ -83,10 +83,9 @@
 									icon: 'success',
 									duration: 1000
 								})
-								this.getOrderList();
-								// uni.navigateTo({
-								// 	url: `/pages/recycle/recycle?orderId=${res1.insertId}`
-								// })
+								uni.navigateTo({
+									url: `/pages/recycle/recycle?orderId=${res1.data.insertId}&orderStatus=0`
+								})
 							}
 						} else {
 							console.log('用户点击取消')
