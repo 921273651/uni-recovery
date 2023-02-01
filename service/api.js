@@ -180,6 +180,18 @@ export default {
 		}
 		return null;
 	},
+//商家登录
+async manage(params) {
+		const res = await fetch.request({
+			url: 'user/manage',
+			method: 'POST',
+			data: params
+		});
+		if (res.code === '2000') {
+			return res.data[0];
+		}
+		return null;
+	},
 
 	async register(params) {
 		const res = await fetch.request({

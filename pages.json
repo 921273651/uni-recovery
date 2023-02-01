@@ -147,7 +147,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/admin/admin",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商家管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 
 	"tabBar": {
 		"selectedColor": "#55aa00",

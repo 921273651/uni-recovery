@@ -5,7 +5,7 @@
 
     </uni-card>
     <view class="advertise">
-      <image :src="url" mode="widthFix"></image>
+      <image src="../../static/images/bg/shop-banner.jpg" mode="widthFix"></image>
     </view>
     <view class="cate-box" :style="{'height': height}">
       <view class="cate-title">
@@ -19,21 +19,7 @@
                   <text>{{item.cateName}}</text>
                 </view>
               </uni-col>
-              <!-- <uni-col :span="12">
-              	<view class="demo-uni-col light">
-                   <text>购物袋</text>
-                </view>
-              </uni-col> -->
-              <!-- <uni-col :span="12">
-              	<view class="demo-uni-col light">
-                   <text>兑换话费</text>
-                </view>
-              </uni-col> -->
-              <!-- <uni-col :span="12">
-              	<view class="demo-uni-col light">
-                   <text>优惠券</text>
-                </view>
-              </uni-col> -->
+              
             
             </view>
        
@@ -47,7 +33,7 @@
   export default {
     data() {
       return {
-        url: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.uhbXYV8AJqA879-E_eHGDgHaC_?w=186&h=80&c=7&r=0&o=5&dpr=1.88&pid=1.7',
+        
         avatar: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.VWRK3D4CN_uVkIhEsttI8wHaF2?w=246&h=194&c=7&r=0&o=5&dpr=1.88&pid=1.7',
         itemList:[],
         
@@ -128,11 +114,16 @@
 
   .advertise {
     width: 100%;
+   border-radius: 50rpx;
+  text-align: center;
+   
   }
 
   .advertise image {
     /* margin-left:100rpx; */
-    width: 100%;
+    width: 90%;
+  
+    
   }
 
   .cate-box {

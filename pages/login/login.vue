@@ -52,6 +52,7 @@
       return {
         cellPhone: '',
         password: '',
+        username:'',
         checked: false
       }
     },
@@ -82,6 +83,7 @@
         const userInfo = await this.$api.login({
           cellphone: this.cellPhone,
           password: this.password,
+          username:this.username,
         });
         if (userInfo) {
           uni.showToast({
@@ -99,40 +101,49 @@
           })
         }
 
-        // uni.request({
-        //   url:'http://localhost:3000/api/user/login',
-        //   method:'POST',
-        //   data: {
-        //     cellphone: this.cellPhone,
-        // 	password: this.password
-        //   },
-        //   success:(res) =>{
-        // 	  console.log('res',res)
-        //     if(res.data.code==2000){		    
-        // 	  uni.showToast({
-        // 	      title: res.data.message,
-        // 	      icon: 'success',
-        // 	      duration: 2000,
-        // 		  success: ()=>{
-        // 			  uni.setStorageSync('userInfo', res.data.data[0]);
-        // 			  setTimeout(()=>{
-        // 				uni.reLaunch({
-        // 				  url: '/pages/home/home'
-        // 				}) 
-        // 			  },500)
-        // 		  }
-        // 	  })
-        //     } else {
-        // 	  uni.showToast({
-        // 	      title: res.data.message,
-        // 	      icon: 'none',
-        // 	      duration: 2000
-        // 	  })
-        // 	}
-        //   }
-        // })
+       
 
-
+      },
+      //商家登录方法
+     async manage(){
+          console.log("写入商家登陆方法");
+          if (!(this.cellPhone && this.password)) {
+            uni.showToast({
+              title: '请填写表单内容！',
+              icon: 'none',
+              duration: 2000
+            })
+            return;
+          }
+          if (!this.checked) {
+            uni.showToast({
+              title: '请阅读并勾选平台协议！',
+              icon: 'none',
+              duration: 2000
+            })
+            return;
+          }
+        
+          const userInfo = await this.$api.manage({
+            cellphone: this.cellPhone,
+            password: this.password,
+          });
+          if (userInfo) {
+            uni.showToast({
+              title: '登录成功！',
+              icon: 'success',
+              duration: 1000,
+              success: () => {
+                uni.setStorageSync('userInfo', userInfo);
+                setTimeout(() => {
+                  uni.reLaunch({
+                    url: '/pages/admin/admin'
+                  })
+                }, 500)
+              }
+            })
+          
+        }
       },
     },
   }

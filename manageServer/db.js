@@ -44,7 +44,7 @@ const login = function (reqBody) {
         from
             tb_user
         where
-        tb_user.username='${cellphone}' and tb_user.password='${password}'
+        tb_user.phoneNum='${cellphone}' and tb_user.password='${password}'
         `;
   return sql;
 }
@@ -56,7 +56,23 @@ const register = function (reqBody) {
     password,
   } = reqBody;
   const sql =
-    `INSERT into tb_user (username,password) values('${cellphone}','${password}');`
+    `INSERT into tb_user (phoneNum,password) values('${cellphone}','${password}');`
+  return sql;
+}
+//商家登录
+const manage = function (reqBody) {
+  const {
+    cellphone,
+    password,
+  } = reqBody;
+  const sql = `
+        select
+            *
+        from
+            tb_business
+        where
+        tb_business.cellphone='${cellphone}' and tb_business.password='${password}'
+        `;
   return sql;
 }
 
@@ -262,6 +278,7 @@ module.exports = {
   Query,
   login,
   register,
+  manage,
   getTest,
   getCatesList,
   getAddress,

@@ -47,22 +47,22 @@
       <text>活动中心</text>
   </view>
   <uni-col :span="12">
-  	<view class="demo-uni-col light" @click="goChange()">
+  	<view class="demo-uni-col light" @click="goChange()" style="background: url(../../static/images/avatar/shop.jpg); background-size:contain;">
       <text>积分商城</text>
     </view>
   </uni-col>
   <uni-col :span="12">
-  	<view class="demo-uni-col light">
+  	<view class="demo-uni-col light" style="background: url(../../static/images/avatar/activity.jpg); background-size:contain;">
       <text>活动中心</text>
     </view>
   </uni-col>
   <uni-col :span="12">
-  	<view class="demo-uni-col light" @click="goVideo()">
+  	<view class="demo-uni-col light" @click="goVideo()" style="background: url(../../static/images/avatar/video.jpg); background-size:contain;">
       <text>视频专区</text>
     </view>
   </uni-col>
   <uni-col :span="12">
-  	<view class="demo-uni-col light">
+  	<view class="demo-uni-col light" style="background: url(../../static/images/avatar/kefu.jpg); background-size:contain;">
       <text>客服咨询</text>
     </view>
   </uni-col>
@@ -196,6 +196,7 @@
           	height: 100%;
           	padding: 40rpx;
           	box-sizing: border-box;
+            color:#B8860B;
           }
           .cate-title {
           	position: relative;
