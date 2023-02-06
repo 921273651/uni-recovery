@@ -105,12 +105,22 @@ const getCatesList = function (reqBody) {
 
 //获取订单列表
 const getOrderList = function (reqBody, userId) {
-  const sql = `
+  const {isAdmin} = reqBody;
+  let sql = '';
+  if(isAdmin) {
+    sql = `
+    SELECT * FROM tb_order
+    left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
+    inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
+   left JOIN tb_user ON tb_order.user_id = tb_user.userId;
+    `;
+  }else{ sql = `
       SELECT * FROM tb_order 
       left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
       inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
       where tb_order.user_id = ${userId};
-    `
+    `;
+    }
   return sql;
 }
 
@@ -167,8 +177,20 @@ const submitRecycleOrder = function (reqBody) {
 
 // 获取回收订单列表
 const getRecycleOrderList = function (reqBody, userId) {
-  const { orderId } = reqBody;
-  let sql = `
+  const { orderId, isAdmin, pageCurrent, pageSize } = reqBody;
+  let sql = '';
+  if(isAdmin) {
+    sql = `
+    (select
+        *
+    from
+        tb_recycle_order
+    left JOIN tb_address ON tb_recycle_order.address_id = tb_address.address_id 
+    left JOIN tb_user ON tb_recycle_order.user_id = tb_user.userId
+    limit ${(pageCurrent-1)*pageSize},${pageSize})
+    `;
+  }else {
+    sql = `
         select
             *
         from
@@ -176,7 +198,12 @@ const getRecycleOrderList = function (reqBody, userId) {
         left JOIN tb_address ON tb_recycle_order.address_id = tb_address.address_id 
         where tb_recycle_order.user_id=${userId} ${orderId ? 'and tb_recycle_order.order_id =' + orderId : ''}
         `;
+  }
   return sql;
+}
+
+const getorderTotal = function () {
+  return 'select count(*) as total from tb_recycle_order'
 }
 
 //确认收货
@@ -294,5 +321,6 @@ module.exports = {
   selectRecycleAddress,
   getRecycleOrderList,
   submitRecycleOrder,
-  checkRecycle
+  checkRecycle,
+  getorderTotal
 }

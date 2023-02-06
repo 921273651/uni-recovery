@@ -100,7 +100,11 @@ export default {
 			data: params
 		});
 		if (res.code === '2000') {
+      if(res.total) {
+        return {data:res.data, total: res.total}
+      } else {
 			return res.data;
+      }
 		}
 		return [];
 	},
@@ -146,12 +150,13 @@ export default {
 	},
 	
 	//获取订单列表
-	async getOrderList() {
+	async getOrderList(params) {
 		const res = await fetch.request({
 			url: 'goods/getOrderList',
+      data:params
 		})
 		if (res.code === '2000') {
-			return res.data;
+        return res.data;
 		}
 		return [];
 	},

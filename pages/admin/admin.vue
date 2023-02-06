@@ -1,12 +1,13 @@
 <template>
   <view class="admin-page" style="background: url(../../static/images/bg/admin-bg.jpg) no-repeat; background-size: contain; ">
-    <button class="order" type="default">管理订单页 </button>
-    <button class="change" type="default">管理兑换页 </button>
+    <button class="order" type="default" @click="checkOrder">管理订单页 </button>
+    <button class="change" type="default" @click="checkChange">管理兑换页 </button>
   </view>
 </template>
 
 <script>
   export default {
+    
     data() {
       return {
         
@@ -15,6 +16,19 @@
     onShow() {
       wx.hideHomeButton(); 
     },
+    methods:{
+      checkOrder(){
+        uni.navigateTo({
+          url:'../admin-order/admin-order'
+        })
+      },
+      checkChange(){
+        uni.navigateTo({
+          url:'../admin-change/admin-change'
+        })
+      },
+    },
+    
   }
 </script>
 

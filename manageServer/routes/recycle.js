@@ -81,12 +81,27 @@ router.post('/selectRecycleAddress', (req, res) => {
 router.post('/getRecycleOrderList', (req, res) => {
   const userId = req.header('token');
   let sql = db.getRecycleOrderList(req.body, userId);
-
+  const { isAdmin } = req.body;
+  console.log('sql', sql);
   db.Query(sql).then(data => {
     console.log('data', data);
     if (data) {
       console.log('有待填写订单');
-      res.send({ "code": "2000", "data": data, "message": "有待填写订单" });
+      if(isAdmin) {
+        db.Query('select count(*) as total from tb_recycle_order').then(data1 => {
+          if (data1) {
+            console.log('获取total');
+            res.send({ "code": "2000", "data": data, "total": data1[0].total,"message": "订单成功提交！" });
+          } else {
+            res.send({ "code": "400", "message": "订单提交失败！" });
+          }
+        }, err => {
+          console.log('err', err);
+          res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
+        })
+      }else {
+        res.send({ "code": "2000", "data": data, "message": "有待填写订单" });
+      }
     } 
     // else {
     //   res.send({ "code": "400", "message": "无待填写订单" });
