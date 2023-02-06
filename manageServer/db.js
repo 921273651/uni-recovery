@@ -177,7 +177,8 @@ const submitRecycleOrder = function (reqBody) {
 
 // 获取回收订单列表
 const getRecycleOrderList = function (reqBody, userId) {
-  const { orderId, isAdmin, pageCurrent, pageSize } = reqBody;
+  const { orderId, isAdmin, pageCurrent, pageSize, searchData } = reqBody;
+  console.log('searchData', searchData);
   let sql = '';
   if(isAdmin) {
     sql = `
@@ -187,6 +188,7 @@ const getRecycleOrderList = function (reqBody, userId) {
         tb_recycle_order
     left JOIN tb_address ON tb_recycle_order.address_id = tb_address.address_id 
     left JOIN tb_user ON tb_recycle_order.user_id = tb_user.userId
+    ${searchData.username ? 'where username='+searchData.username : ''}
     limit ${(pageCurrent-1)*pageSize},${pageSize})
     `;
   }else {

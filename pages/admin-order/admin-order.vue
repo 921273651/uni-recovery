@@ -2,13 +2,13 @@
   
   <view class="adminOrder">
     <view class="uni-container">
-      				<uni-forms ref="dynamicForm"  :modelValue="dynamicFormData">
+      				<uni-forms ref="dynamicForm" :modelValue="dynamicFormData">
       					<uni-forms-item label="用户名" required name="username">
       						<uni-easyinput v-model="dynamicFormData.username" placeholder="请输入姓名" />
       					</uni-forms-item>
       				</uni-forms>
-      					<button type="primary" size="mini" @click="submit('dynamicForm')">搜索</button>
-    			<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
+      					<button type="primary" size="mini" @click="submit">搜索</button>
+    			<uni-table ref="table" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
     				<uni-tr>
     					<uni-th width="150" align="center">订单编号</uni-th>
               <uni-th width="150" align="center">用户名</uni-th>
@@ -41,7 +41,7 @@
     					</uni-td>
     				</uni-tr>
     			</uni-table>
-    			<view class="uni-pagination-box"><uni-pagination show-icon :page-size="pageSize" :current="pageCurrent" :total="total" @change="change" /></view>
+    			<view class="uni-pagination-box" v-if="!loading">{{pageCurrent}}<uni-pagination show-icon :page-size="pageSize" v-model="pageCurrent" :total="total" @change="change" /></view>
     		</view>
   </view>
 </template>
@@ -53,7 +53,7 @@
       return {
         orderList:[],
         dynamicFormData:{
-          name:""
+          username:""
         },
         searchVal: '',
         			
@@ -75,7 +75,7 @@
      methods:{
        //获取订单列表
        async getOrderlist(pageCurrent){
-         const res = await this.$api.getRecycleOrderList({isAdmin:true, pageCurrent, pageSize: this.pageSize});
+         const res = await this.$api.getRecycleOrderList({isAdmin:true, searchData: this.dynamicFormData, pageCurrent, pageSize: this.pageSize});
          if(res) {
           this.orderList = res.data;
           this.total = res.total;
@@ -85,6 +85,12 @@
            console.log('请求错误')
          }
        },
+	   submit(){
+			 this.loading = true;
+			 this.pageCurrent = 1;
+			 this.loading = false;
+			 this.getOrderlist(1)
+	   },
        change(e){
          this.getOrderlist(e.current)
        }
