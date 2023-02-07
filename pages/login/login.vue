@@ -159,7 +159,7 @@
   	display: block;
   	position: absolute;
   	width: 100%;
-  	height: 850px;
+  	height: 550px;
   	background: #356363;
   
   	/* 换图片 */
