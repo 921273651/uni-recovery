@@ -25,14 +25,14 @@
 		<!-- 详细信息开始 -->
 		<view class="form">
 			<view class="top">
-				<span>预估重量({{idToName[category_id-1]}})：</span><input type="number" :disabled="orderStatus!=='0'"
+				<span>预估重量({{idToName[category_id-1]}})：</span><input type="number" :disabled="!isEdit"
 					v-model="weightList[category_id-1]" style="width: 300rpx;" placeholder="单位为公斤" />
 			</view>
 			<view class="center">
 				<view class="address">
 					<view class="iconfont icon-dingwei"></view>
 					<text>预约地址：</text>
-					<button @click="gotoAddress" :disabled="orderStatus!=='0'">从地址簿选择</button>
+					<button @click="gotoAddress" :disabled="!isEdit">从地址簿选择</button>
 				</view>
 				<view class="address-info-box">
 					<view class="row1">
@@ -60,7 +60,8 @@
 					<view class="uni-list">
 						<view class="uni-list-cell">
 							<view class="uni-list-cell-db">
-								<picker mode="date" :value="formdata.call_date" @change="bindDateChange" :disabled="orderStatus!=='0'">
+								<picker mode="date" :value="formdata.call_date" @change="bindDateChange"
+									:disabled="!isEdit">
 									<view class="uni-input">{{formdata.call_date || '请选择'}}</view>
 								</picker>
 							</view>
@@ -73,7 +74,7 @@
 						<view class="uni-list-cell">
 							<view class="uni-list-cell-db">
 								<picker mode="time" :value="formdata.call_time" start="09:01" end="21:01"
-									@change="bindTimeChange" :disabled="orderStatus!=='0'">
+									@change="bindTimeChange" :disabled="!isEdit">
 									<view class="uni-input">{{formdata.call_time || '请选择'}}</view>
 								</picker>
 							</view>
@@ -82,7 +83,7 @@
 				</view>
 				<view class="beizhu">备注：</view>
 				<view class="top">
-					<textarea v-model="formdata.remark" placeholder="请输入" :disabled="orderStatus!=='0'" />
+					<textarea v-model="formdata.remark" placeholder="请输入" :disabled="!isEdit" />
 				</view>
 			</view>
 		</view>
@@ -94,7 +95,7 @@
 			<button type="primary" plain="true" @click="submit(2)">确定下单</button>
 		</view>
 		<!-- 按钮结束 -->
-		
+
 
 	</view>
 </template>
@@ -121,7 +122,8 @@
 					'金属类',
 					'家具类',
 					'电器类'
-				]
+				],
+				isEdit: false
 			}
 		},
 
@@ -129,13 +131,18 @@
 			this.isLoading = true;
 			this.orderId = option.orderId;
 			this.orderStatus = option.orderStatus;
+			this.isEdit = this.orderStatus === '0';
 			await this.getcateList();
-			await this.getOrderList({orderId: this.orderId});
+			await this.getOrderList({
+				orderId: this.orderId
+			});
 			this.isLoading = false;
 		},
 		async onShow() {
-			if(!this.isLoading){
-				const res = await this.$api.getRecycleOrderList({orderId: this.orderId});
+			if (!this.isLoading) {
+				const res = await this.$api.getRecycleOrderList({
+					orderId: this.orderId
+				});
 				this.formdata.address_username = res[0].address_username;
 				this.formdata.address_phoneNumber = res[0].address_phoneNumber;
 				this.formdata.address_city = res[0].address_city;
@@ -145,7 +152,7 @@
 		methods: {
 			async getOrderList(params) {
 				const res = await this.$api.getRecycleOrderList(params);
-				if(res) {
+				if (res) {
 					this.formdata = res[0];
 					this.weightList = res[0].estimated_weight.split(',');
 				}
@@ -210,11 +217,18 @@
 					...this.formdata,
 					orderType: type
 				});
-       uni.showToast({
-       	title: '成功下单~',
-       	icon: 'success',
-       	duration: 1000
-       })
+				uni.showToast({
+					title: '成功下单~',
+					icon: 'success',
+					duration: 1000,
+					success: () => {
+					  setTimeout(() => {
+					    uni.reLaunch({
+					      url: '/pages/recycle_order/recycle_order'
+					    })
+					  }, 500)
+					}
+				})
 				console.log('formdata', this.formdata)
 			},
 			gotoAddress() {
@@ -237,41 +251,42 @@
 		flex-direction: column;
 		justify-content: center;
 		padding: 0 5px;
-	
+
 		.row1 {
 			display: flex;
 			justify-content: space-between;
-	
+
 			.row1-right {
 				display: flex;
 				justify-content: space-between;
-	
+
 				.phone {}
 			}
-	
+
 			.row1-left {
 				.username {}
 			}
 		}
-	
+
 		.row2 {
 			display: flex;
-	
+
 			align-items: center;
 			margin-top: 10px;
-	
+
 			.row2-left {
 				white-space: nowrap;
 			}
-	
+
 			.row2-right {}
 		}
-	
+
 		.address-choose-box {
 			text-align: center;
 		}
-	
+
 	}
+
 	.iconfont {
 		font-size: 100rpx;
 	}

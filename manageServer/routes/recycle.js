@@ -129,6 +129,7 @@ router.post('/submitRecycleOrder', (req, res) => {
   })
 })
 
+// 确认回收
 router.post('/checkRecycle', (req, res) => {
   let sql = db.checkRecycle(req.body);
 
@@ -139,6 +140,24 @@ router.post('/checkRecycle', (req, res) => {
       res.send({ "code": "2000", "data": data, "message": "确认回收成功！" });
     } else {
       res.send({ "code": "400", "message": "确认回收失败！" });
+    }
+  }, err => {
+    console.log('err', err);
+    res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
+  })
+})
+
+// 商家接受回收订单
+router.post('/againOrder', (req, res) => {
+  let sql = db.againOrder(req.body);
+
+  db.Query(sql).then(data => {
+    console.log('data', data);
+    if (data) {
+      console.log('接受回收订单成功！');
+      res.send({ "code": "2000", "data": data, "message": "接受回收订单成功！" });
+    } else {
+      res.send({ "code": "400", "message": "接受回收订单失败！" });
     }
   }, err => {
     console.log('err', err);

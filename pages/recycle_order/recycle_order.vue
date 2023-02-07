@@ -18,13 +18,13 @@
 			<button type="default" v-if="!isCreated" @click="createRecycleOrder()">预约上门回收</button>
 		</div>
 		<view class="list">
-			<uni-card v-for="(item, index) in orderList" :key="item.order_id" :title="`订单编号 ${item.order_id}`" :extra="item.order_status==='0'?'订单待确认':item.order_status==='1'?'上门回收中':'已回收'" @click="gotoDetail(item.order_id,item.order_status,item.address_id)">
+			<uni-card v-for="(item, index) in orderList" :key="item.order_id" :title="`订单编号 ${item.order_id}`" :extra="statusToName[item.order_status]" @click="gotoDetail(item.order_id,item.order_status,item.address_id)">
 				<view class="uni-body">
 					<p v-for="(iitem,iindex) in item.estimated_weight">回收{{categoryList[iindex].category}}：{{iitem}}kg</p>
 					<p>{{item.address_username || ''}} {{item.address_phoneNumber || ''}}</p>
 					<p>地址：{{item.address_city || '待填写'}}{{item.address_information || ''}}</p>
 					<!-- <div class="list-box-bot"><p>花费积分：{{item.catePrice}}</p></div> -->
-					<div class="list-box-bot"><p>回收类型：{{item.order_type==='1'?'公益捐赠':'正常'}}</p><button v-if="item.order_status==='1'" @click.stop="checkRecycle(item.order_id)">确认回收</button></div>
+					<div class="list-box-bot"><p>回收类型：{{item.order_type==='1'?'公益捐赠':'正常'}}</p><button v-if="item.order_status==='2'" @click.stop="checkRecycle(item.order_id)">确认回收</button></div>
 				</view>
 			</uni-card>
 
@@ -37,7 +37,14 @@
 		data() {
 			return {
 				orderList: [],
-				categoryList: []
+				categoryList: [],
+				statusToName: {
+					'0': '待确认',
+					'1': '等待商家接单',
+					'2': '上门回收中',
+					'3': '已回收',
+					'4': '商家已拒单',
+				}
 			};
 		},
 		onShow(){

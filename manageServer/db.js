@@ -215,10 +215,17 @@ const checkOrder = function (reqBody) {
   return sql;
 }
 
-//确认回收
+// 确认回收
 const checkRecycle = function (reqBody) {
   const { orderId } = reqBody;
-  const sql = `UPDATE tb_recycle_order SET order_status='2' where order_id = '${orderId}'`
+  const sql = `UPDATE tb_recycle_order SET order_status='3' where order_id = '${orderId}'`
+  return sql;
+}
+
+// 接受回收订单
+const againOrder = function (reqBody) {
+  const { order_id } = reqBody;
+  const sql = `UPDATE tb_recycle_order SET order_status='2' where order_id = '${order_id}'`
   return sql;
 }
 
@@ -324,5 +331,6 @@ module.exports = {
   getRecycleOrderList,
   submitRecycleOrder,
   checkRecycle,
-  getorderTotal
+  getorderTotal,
+  againOrder
 }

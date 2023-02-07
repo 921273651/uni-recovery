@@ -149,6 +149,19 @@ export default {
 		return null;
 	},
 	
+	//接受回收订单
+	async againOrder(params) {
+		const res = await fetch.request({
+			url: 'recycle/againOrder',
+			method: 'POST',
+			data: params
+		})
+		if (res.code === '2000') {
+			return res;
+		}
+		return null;
+	},
+	
 	//获取订单列表
 	async getOrderList(params) {
 		const res = await fetch.request({
