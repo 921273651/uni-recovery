@@ -17,17 +17,14 @@
 		<view class="price">
 			<p>今日指导价</p>
 			<view class="title" v-for="(item,index) in itemList" :key="index">
-				<p>{{item.item_name}}------{{item.item_price}}元/公斤</p>
+				<p class="item">{{item.item_name}}------{{item.item_price}}元/公斤</p>
 			</view>
 		</view>
 		<!-- 价格展示结束 -->
 
 		<!-- 详细信息开始 -->
 		<view class="form">
-			<view class="top">
-				<span>预估重量({{idToName[category_id-1]}})：</span><input type="number" :disabled="!isEdit"
-					v-model="weightList[category_id-1]" style="width: 300rpx;" placeholder="单位为公斤" />
-			</view>
+			
 			<view class="center">
 				<view class="address">
 					<view class="iconfont icon-dingwei"></view>
@@ -55,8 +52,12 @@
 				</view>
 			</view>
 			<view>
-				<view class="top">
-					<view class="uni-title uni-common-pl">预约上门日期：</view>
+				<view class="subscrible">
+          <view class="top">
+          	<span>预估重量({{idToName[category_id-1]}})：</span><input type="number" :disabled="!isEdit"
+          		v-model="weightList[category_id-1]" style="width: 300rpx;" placeholder="单位为公斤" />
+          </view>
+					<p class="uni-title uni-common-pl">预约上门日期：</p>
 					<view class="uni-list">
 						<view class="uni-list-cell">
 							<view class="uni-list-cell-db">
@@ -67,8 +68,8 @@
 							</view>
 						</view>
 					</view>
-				</view>
-				<view class="top">
+				
+				
 					<view class="uni-title uni-common-pl">预约上门时间：</view>
 					<view class="uni-list">
 						<view class="uni-list-cell">
@@ -128,6 +129,7 @@
 		},
 
 		async onLoad(option) {
+      console.log('option',option)
 			this.isLoading = true;
 			this.orderId = option.orderId;
 			this.orderStatus = option.orderStatus;
@@ -224,7 +226,7 @@
 					success: () => {
 					  setTimeout(() => {
 					    uni.reLaunch({
-					      url: '/pages/recycle_order/recycle_order'
+					      url: '/pages/order/order'
 					    })
 					  }, 500)
 					}
@@ -241,7 +243,10 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .recycle-page{
+    background-color: #adebda;
+  }
 	.address-info-box {
 		border: 1px solid red;
 		margin: auto;
@@ -313,12 +318,12 @@
 
 	.form {
 		margin: 10px;
-		border-top: 1px solid green;
-		padding-top: 10px;
+		// border-top: 1px solid green;
+		// padding-top: 10px;
 
 		.top {
 			display: flex;
-			flex-wrap: nowrap;
+			flex-wrap: wrap;
 			margin-bottom: 20rpx;
 		}
 
@@ -329,8 +334,17 @@
 	}
 
 	.price {
-		margin: 10px;
-		// border-bottom: 1px solid green;
+		// margin: 10px;
+		border-bottom: 1px solid green;
+    background-color: #fff9e4;
+    border-radius: 10px;
+    .item{
+      width: 280px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin:10px;
+      
+    }
 	}
 
 	.beizhu {
@@ -339,7 +353,8 @@
 
 	.center {
 		margin-bottom: 20rpx;
-
+background-color: #ffffff;
+border-radius: 10px;
 		.address {
 			display: flex;
 			flex-wrap: nowrap;

@@ -233,5 +233,17 @@ async manage(params) {
 			return res;
 		}
 		return null;
-	}
+	},
+  
+  async deleteOrder(params) {
+  	const res = await fetch.request({
+  		url: 'goods/deleteOrder',
+  		method: 'POST',
+  		data: params
+  	});
+  	if (res.code === '2000') {
+  		return res;
+  	}
+  	return null;
+  }
 }

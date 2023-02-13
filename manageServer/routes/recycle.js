@@ -44,15 +44,27 @@ router.post('/register', (req, res) => {
 
 router.post('/createRecycleOrder', (req, res) => {
   const userId = req.header('token');
-  let sql = db.createRecycleOrder(req.body, userId);
+  let {sql1, sql2} = db.createRecycleOrder(req.body, userId);
 
-  db.Query(sql).then(data => {
+  db.Query(sql1).then(data => {
     console.log('data', data);
-    if (data) {
-      console.log('订单成功生成！');
-      res.send({ "code": "2000", "data": data, "message": "订单成功生成！" });
+    if (data.length) {
+      console.log('订单已存在！');
+      res.send({ "code": "2000", "data": data, "message": "订单已存在！" });
     } else {
-      res.send({ "code": "400", "message": "订单生成失败！" });
+      // res.send({ "code": "400", "message": "订单不存在！" });
+      db.Query(sql2).then(data => {
+        console.log('data', data);
+        if (data) {
+          console.log('订单成功生成！');
+          res.send({ "code": "2000", "data": data, "message": "订单成功生成！" });
+        } else {
+          res.send({ "code": "400", "message": "订单生成失败！" });
+        }
+      }, err => {
+        console.log('err', err);
+        res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
+      })
     }
   }, err => {
     console.log('err', err);
