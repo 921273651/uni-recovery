@@ -37,13 +37,6 @@
 			}
 
 		}, {
-			"path": "pages/recycle_order/recycle_order",
-			"style": {
-				"navigationBarTitleText": "回收",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
 			"path": "pages/order/order",
 			"style": {
 				"navigationBarTitleText": "订单",
@@ -52,6 +45,13 @@
 
 		}, {
 			"path": "pages/recycle/recycle",
+			"style": {
+				"navigationBarTitleText": "预约回收",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/recycleTab/recycleTab",
 			"style": {
 				"navigationBarTitleText": "预约回收",
 				"enablePullDownRefresh": true
@@ -191,7 +191,7 @@
 				"selectedIconPath": "static/source/_change.png"
 			},
 			{
-				"pagePath": "pages/recycle_order/recycle_order",
+				"pagePath": "pages/recycleTab/recycleTab",
 				"text": "回收",
 				"iconPath": "static/source/recycle.png",
 				"selectedIconPath": "static/source/_recycle.png"

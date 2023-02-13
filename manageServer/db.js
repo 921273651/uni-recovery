@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 // 创建连接池，效率更高，不需要每次操作数据库都创建连接
 let pool = mysql.createPool({
-  host: 'localhost',
+  host: '39.107.241.37',
   user: 'root',
   password: 'zhangmyi.99',
   database: 'db_uni_recovery',
@@ -118,7 +118,8 @@ const getOrderList = function (reqBody, userId) {
       SELECT * FROM tb_order 
       left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
       inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
-      where tb_order.user_id = ${userId};
+      where tb_order.user_id = ${userId} and isDelete='0';
+      
     `;
     }
   return sql;
@@ -131,10 +132,11 @@ const createOrder = function (reqBody, userId) {
   return sql;
 }
 
-//生成回收订单
+//检查是否已有待确认订单&生成回收订单
 const createRecycleOrder = function (reqBody, userId) {
-  const sql = `INSERT into tb_recycle_order (user_id) values('${userId}');`
-  return sql;
+  const sql1 = `Select * from tb_recycle_order where user_id=${userId} and order_status=0;`
+  const sql2 = `INSERT into tb_recycle_order (user_id) values('${userId}');`
+  return {sql1,sql2};
 }
 
 //选择地址
@@ -229,6 +231,12 @@ const againOrder = function (reqBody) {
   return sql;
 }
 
+//删除商品购买订单
+const deleteOrder= function (reqBody) {
+  const { orderId } = reqBody;
+  const sql = `UPDATE tb_order SET isDelete='1' where order_id = '${orderId}'`
+  return sql;
+}
 //获取地址表数据
 const getAddress = function (reqBody, userId) {
   const { addressId } = reqBody;
@@ -282,6 +290,7 @@ const getInformation = function (reqBody) {
   return sql;
 }
 
+
 // 获取测试数据
 // const getTest = function (userId) {
 //   const sql = `
@@ -332,5 +341,6 @@ module.exports = {
   submitRecycleOrder,
   checkRecycle,
   getorderTotal,
-  againOrder
+  againOrder,
+  deleteOrder
 }

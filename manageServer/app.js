@@ -18,8 +18,8 @@ let itemRouter=require('./routes/item.js')
 let recycleRouter=require('./routes/recycle.js')
 // 实例化
 let app = express();
-app.listen(3000);
-console.log('后端服务已开启,现在监听3000端口...')
+app.listen(8808);
+console.log('后端服务已开启,现在监听8808端口...')
 //使用所需中间件
 app.use(cors());
 app.use(express.json());

@@ -15,8 +15,10 @@
         <view class="container02" >
             <view class="scroll-H">
               <uni-col :span="12" @tap='godetails(index)' v-for="(item,index) in itemList" :key="item.id"  :data-itemid="(item.id)">
-              	<view class="demo-uni-col light">
-                  <text>{{item.cateName}}</text>
+              	<view class="demo-uni-col">
+                  <image class="itemimg"></image>
+                  <text class="cateName">{{item.cateName}}</text>
+                  <p class="catePrice">{{item.catePrice}}积分</p>
                 </view>
               </uni-col>
               
@@ -68,7 +70,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .container03 {
     display: flex;
     flex-wrap: wrap;
@@ -163,10 +165,26 @@
   }
   
   .demo-uni-col {
-  		height: 150px;
-      margin: 20rpx 20rpx 20rpx 20rpx;
+  		height:180px;
+      width:110px;
+      margin:0px 10px 10px 10px;/*上右下左*/
+      background-color: #e5e9f2;
+      /* margin: 20rpx 20rpx 20rpx 20rpx; */
         padding:10rpx;
   		border-radius: 5px;
+       margin-bottom: 20rpx;
+       .itemimg{
+         border:1px  solid  red;
+         width: 100%;
+         height:120px;
+       }
+       .cateName{
+         font-size: 12px;
+       }
+       .catePrice{
+          font-size: 16px;
+          color:#ff5500;
+       }
   	}
   
   .light {
