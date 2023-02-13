@@ -1,5 +1,5 @@
 <template>
-  <view class="admin-page" style="background: url(../../static/images/bg/admin-bg.jpg) no-repeat; background-size: contain; ">
+  <view class="admin-page" style="background: url(http://39.107.241.37:2020/static/images/bg/admin-bg.jpg) no-repeat; background-size: contain; ">
     <button class="order" type="default" @click="checkOrder">管理订单页 </button>
     <button class="change" type="default" @click="checkChange">管理兑换页 </button>
   </view>

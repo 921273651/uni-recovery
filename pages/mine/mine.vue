@@ -67,7 +67,7 @@
 </script>
 <style lang="scss">
   page {
-    background-image: url(../../static/user-bg.jpg);
+    background-image: url(http://39.107.241.37:2020/static/user-bg.jpg);
 
   }
 

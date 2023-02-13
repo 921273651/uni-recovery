@@ -5,7 +5,7 @@
 
     </uni-card>
     <view class="advertise">
-      <image src="../../static/images/bg/shop-banner.jpg" mode="widthFix"></image>
+      <image src="http://39.107.241.37:2020/static/images/bg/shop-banner.jpg" mode="widthFix"></image>
     </view>
     <view class="cate-box" :style="{'height': height}">
       <view class="cate-title">
@@ -16,7 +16,7 @@
             <view class="scroll-H">
               <uni-col :span="12" @tap='godetails(index)' v-for="(item,index) in itemList" :key="item.id"  :data-itemid="(item.id)">
               	<view class="demo-uni-col">
-                  <image class="itemimg"></image>
+                  <image class="itemimg" :src="item.cateUrl"></image>
                   <text class="cateName">{{item.cateName}}</text>
                   <p class="catePrice">{{item.catePrice}}积分</p>
                 </view>

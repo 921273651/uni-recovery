@@ -161,7 +161,7 @@
     	//拿到分类列表数据
     	getcateList() {
     		uni.request({
-    			url: 'http://localhost:3000/api/item/getItemList', //获取分类列表接口
+    			url: 'http://39.107.241.37:8808/api/item/getItemList', //获取分类列表接口
     			success: (res) => {
     				console.log(res, '分类列表接口返回的信息');
     				if (res.data.code == 2000) {
@@ -177,7 +177,7 @@
     	//拿到当前分类id以及分类下的数据
     	getDetail() {
     		uni.request({
-    			url: 'http://localhost:3000/api/item/getInformation', //获取分类列表接口
+    			url: 'http://39.107.241.37:88088808/api/item/getInformation', //获取分类列表接口
     			data: {
     				category_id: this.category_id
     			},

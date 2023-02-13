@@ -18,7 +18,7 @@
         </checkbox-group>
 
         <view class="pic">
-          <image src="../../static/catfood1.jpg" mode=""></image>
+          <image src="http://39.107.241.37:2020/static/catfood1.jpg" mode=""></image>
         </view>
         <view class="content">
           <view class="title">优质猫粮优质猫粮优质猫粮优质猫粮</view>

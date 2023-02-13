@@ -34,11 +34,11 @@
 		<!-- 详情开始 -->
 		<view>
 			<view>
-				<image class="detail-image" src="../../static/images/home/goods/1.png" mode=""></image>
-				<image class="detail-image" src="../../static/images/home/goods/2.png"></image>
-				<image class="detail-image" src="../../static/images/home/goods/3.png"></image>
-				<image class="detail-image" src="../../static/images/home/goods/4.png"></image>
-				<image class="detail-image" src="../../static/images/home/goods/5.png"></image>
+				<image class="detail-image" src="http://39.107.241.37:2020/static/images/home/goods/1.png" mode=""></image>
+				<image class="detail-image" src="http://39.107.241.37:2020/static/images/home/goods/2.png"></image>
+				<image class="detail-image" src="http://39.107.241.37:2020/static/images/home/goods/3.png"></image>
+				<image class="detail-image" src="http://39.107.241.37:2020/static/images/home/goods/4.png"></image>
+				<image class="detail-image" src="http://39.107.241.37:2020/static/images/home/goods/5.png"></image>
 			</view>
 		</view>
 		<!-- 详情结束 -->
@@ -64,10 +64,10 @@
 			return {
 
 				swiperlist: [{
-						imgUrl: "../../static/advertise1.jpg"
+						imgUrl: "http://39.107.241.37:2020/static/advertise1.jpg"
 					},
 					{
-						imgUrl: "../../static/advertise2.jpg"
+						imgUrl: "http://39.107.241.37:2020/static/advertise2.jpg"
 					},
 				],
 

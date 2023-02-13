@@ -1,7 +1,7 @@
 export default {
 	config: {
 		// baseURL: 'http://192.168.31.63:3000/api/',
-		// baseURL: 'http://localhost:3000/api/',
+		// baseURL: 'http://39.107.241.37:8808/api/',
 		baseURL: 'http://39.107.241.37:8808/api/',
 		// 处理token的方法
 		getToken() {
