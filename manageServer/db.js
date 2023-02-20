@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 // 创建连接池，效率更高，不需要每次操作数据库都创建连接
 let pool = mysql.createPool({
-  host: '39.107.241.37',
+  host: 'localhost',
   user: 'root',
   password: 'zhangmyi.99',
   database: 'db_uni_recovery',

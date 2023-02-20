@@ -23,7 +23,7 @@
     methods:{
       getVideoList(){
         uni.request({
-          url:'http://39.107.241.37:8808/api/goods/getCatesList',
+          url:'http://localhost:8000/api/goods/getCatesList',
           data: {
             cateType: 'videos'
           },
