@@ -42,6 +42,7 @@ router.post('/register', (req, res) => {
   })
 })
 
+//生成订单
 router.post('/createRecycleOrder', (req, res) => {
   const userId = req.header('token');
   let {sql1, sql2} = db.createRecycleOrder(req.body, userId);
@@ -72,6 +73,7 @@ router.post('/createRecycleOrder', (req, res) => {
   })
 })
 
+//选择地址
 router.post('/selectRecycleAddress', (req, res) => {
   let sql = db.selectRecycleAddress(req.body);
 
@@ -124,6 +126,7 @@ router.post('/getRecycleOrderList', (req, res) => {
   })
 })
 
+//提交回收订单
 router.post('/submitRecycleOrder', (req, res) => {
   let sql = db.submitRecycleOrder(req.body);
 
