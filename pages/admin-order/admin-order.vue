@@ -1,6 +1,6 @@
 <template>
 
-	<view class="adminOrder">
+	<view class="adminOrder" >
 		<view class="uni-container">
 			<uni-forms ref="dynamicForm" :modelValue="dynamicFormData">
 				<uni-forms-item label="用户名" required name="username">
@@ -9,15 +9,15 @@
 			</uni-forms>
 			<button type="primary" size="mini" @click="submit">搜索</button>
 			<uni-table ref="table" border stripe type="selection" emptyText="暂无更多数据"
-				@selection-change="selectionChange">
+				@selection-change="selectionChange" >
 				<uni-tr>
-					<uni-th width="150" align="center">订单编号</uni-th>
-					<uni-th width="150" align="center">用户名</uni-th>
-					<uni-th width="150" align="center">日期</uni-th>
+					<uni-th width="50" align="center">订单编号</uni-th>
+					<uni-th width="80" align="center">用户名</uni-th>
+					<uni-th width="100" align="center">日期</uni-th>
 					<uni-th align="center">地址</uni-th>
-					<uni-th width="150" align="center">订单内容</uni-th>
-					<uni-th width="150" align="center">订单状态</uni-th>
-					<uni-th width="204" align="center">操作</uni-th>
+					<uni-th width="200" align="center">订单内容</uni-th>
+					<uni-th width="120" align="center">订单状态</uni-th>
+					<uni-th width="100" align="center">操作</uni-th>
 				</uni-tr>
 				<uni-tr v-for="(item, index) in orderList" :key="index">
 					<uni-td class="id">{{ item.order_id }}</uni-td>
@@ -29,7 +29,7 @@
 					</uni-td>
 					<uni-td align="center" class="address">{{ item.address_city + item.address_information }}</uni-td>
 					<uni-td>
-						<view class="content">{{ item.content }}</view>
+						<view class="content" v-for="(iitem,iindex) in item.estimated_weight">回收{{categoryList[iindex].category}}：{{iitem}}kg</view>
 					</uni-td>
 					<uni-td>
 						<view class="status">{{ statusToName[item.order_status] }}</view>
@@ -43,7 +43,7 @@
 					</uni-td>
 				</uni-tr>
 			</uni-table>
-			<view class="uni-pagination-box" v-if="!loading">{{pageCurrent}}
+			<view class="uni-pagination-box" v-if="!loading">
 				<uni-pagination show-icon :page-size="pageSize" v-model="pageCurrent" :total="total" @change="change" />
 			</view>
 		</view>
@@ -56,12 +56,13 @@
 		data() {
 			return {
 				orderList: [],
+        categoryList: [],
 				dynamicFormData: {
 					username: ""
 				},
 				searchVal: '',
 				// 每页数据量
-				pageSize: 2,
+				pageSize: 10,
 				// 当前页
 				pageCurrent: 1,
 				// 数据总量
@@ -82,17 +83,38 @@
 		onShow() {
 			this.getOrderlist(this.pageCurrent)
 		},
+    mounted(){
+    	this.getOrderlist();
+    	this.getcateList();
+    },
+   
+    	
 		methods: {
+      getcateList() {
+      	uni.request({
+      		url: 'http://localhost:8000/api/item/getItemList', //获取分类列表接口
+      		success: (res) => {
+      			console.log(res, '分类列表接口返回的信息');
+      			if (res.data.code == 2000) {
+      				this.categoryList = res.data.data;
+      				console.log('this.categoryList',this.categoryList)
+      			}
+      		}
+      	})
+      },
+     
 			//获取订单列表
 			async getOrderlist(pageCurrent) {
 				const res = await this.$api.getRecycleOrderList({
 					isAdmin: true,
 					searchData: this.dynamicFormData,
 					pageCurrent,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+          
 				});
 				if (res) {
 					this.orderList = res.data;
+          this.orderList.map(i=>i.estimated_weight = i.estimated_weight.split(','))
 					this.total = res.total;
 					console.log(this.orderList, 'orderList')
 				} else {
@@ -148,6 +170,7 @@
 </script>
 
 <style lang="scss">
+  
 	.uni-group {
 		display: flex;
 		align-items: center;

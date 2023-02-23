@@ -10,13 +10,13 @@
      					<button type="primary" size="mini" @click="submit('dynamicForm')">搜索</button>
    			<uni-table ref="table" :loading="loading" border stripe type="selection" emptyText="暂无更多数据" @selection-change="selectionChange">
    				<uni-tr>
-   					<uni-th width="150" align="center">订单编号</uni-th>
-             <uni-th width="150" align="center">用户名</uni-th>
-   					<uni-th width="150" align="center">日期</uni-th>
+   					<uni-th width="50" align="center">订单编号</uni-th>
+             <uni-th width="80" align="center">用户名</uni-th>
+   					<uni-th width="80" align="center">日期</uni-th>
    					<uni-th align="center">地址</uni-th>
-             <uni-th width="150" align="center">订单内容</uni-th>
-             <uni-th width="150" align="center">订单状态</uni-th>
-   					<uni-th width="204" align="center">设置</uni-th>
+             <uni-th width="100" align="center">订单内容</uni-th>
+             <uni-th width="80" align="center">订单状态</uni-th>
+   					<uni-th width="150" align="center">设置</uni-th>
    				</uni-tr>
    				<uni-tr v-for="(item, index) in changeList" :key="index">
    					<uni-td class="id">{{ item.order_id }}</uni-td>
