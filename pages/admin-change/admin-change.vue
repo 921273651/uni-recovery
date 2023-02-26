@@ -33,7 +33,7 @@
              </uni-td>
    					<uni-td>
    						<view class="uni-group">
-   							<button class="uni-button" size="mini" type="primary">修改</button>
+   							<button v-if="item.order_status === '1'" class="uni-button" size="mini" type="primary" @click="fahuo(item.order_id)">发货</button>
    							<button class="uni-button" size="mini" type="warn" @click="deleteOrder(item.order_id)">删除</button>
    						</view>
    					</uni-td>
@@ -52,7 +52,8 @@
               statusToName: {
               	'0': '待接收',
               	'1': '待发货',
-              	'2': '已完成',
+                '2': '已发货',
+              	'3': '已完成',
               	
               }
       };
@@ -80,9 +81,20 @@
          		icon: 'success',
          		duration: 1000
          	})
-         	this.getOrderList()
+         	this.getChangelist()
          }
        },
+      async fahuo(orderId){
+         const res = await this.$api.fahuo({orderId:orderId});
+         if (res) {
+         	uni.showToast({
+         		title: '发货成功！',
+         		icon: 'success',
+         		duration: 1000
+         	})
+         	this.getChangelist();
+         }
+       }
     },
     
   }

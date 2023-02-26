@@ -235,9 +235,23 @@ async manage(params) {
 		return null;
 	},
   
+  //删除订单
   async deleteOrder(params) {
   	const res = await fetch.request({
   		url: 'goods/deleteOrder',
+  		method: 'POST',
+  		data: params
+  	});
+  	if (res.code === '2000') {
+  		return res;
+  	}
+  	return null;
+  },
+  
+  //商家发货
+  async fahuo(params) {
+  	const res = await fetch.request({
+  		url: 'goods/fahuo',
   		method: 'POST',
   		data: params
   	});

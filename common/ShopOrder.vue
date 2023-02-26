@@ -14,12 +14,12 @@
   		</view>
   	</view> -->
   	<view class="list">
-  		<uni-card v-for="(item, index) in orderList" :key="item.order_id" :title="`订单编号 ${item.order_id}`" :extra="item.order_status==='0'?'订单待确认':item.order_status==='1'?'送货上门中':'已收货'" @click="gotoDetail(item.order_id,item.order_status,item.address_id)">
+  		<uni-card v-for="(item, index) in orderList" :key="item.order_id" :title="`订单编号 ${item.order_id}`" :extra="item.order_status==='0'?'订单待确认':item.order_status==='1'?'待发货':item.order_status==='2'?'送货上门中':'已收货'" @click="gotoDetail(item.order_id,item.order_status,item.address_id)">
   			<view class="uni-body">
   				<p>兑换商品：{{item.cateName}}</p>
   				<p>{{item.address_username || ''}} {{item.address_phoneNumber || ''}}</p>
   				<p>地址：{{item.address_city || '待填写'}}{{item.address_information || ''}}</p>
-  				<div class="list-box-bot"><p>花费积分：{{item.catePrice}}</p><button v-if="item.order_status==='1'" @click.stop="checkGoods(item.order_id)">确认收货</button>
+  				<div class="list-box-bot"><p>花费积分：{{item.catePrice}}</p><button v-if="item.order_status==='2'" @click.stop="checkGoods(item.order_id)">确认收货</button>
            <button v-else style="background-color: #ffca4c;color:white;" @click.stop="deleteOrder(item.order_id)">删除</button>
           </div>
   			</view>

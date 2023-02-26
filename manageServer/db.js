@@ -110,10 +110,10 @@ const getOrderList = function (reqBody, userId) {
   if(isAdmin) {
     sql = `
     SELECT * FROM tb_order
-    
     left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
     inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
-   left JOIN tb_user ON tb_order.user_id = tb_user.userId;
+   left JOIN tb_user ON tb_order.user_id = tb_user.userId
+   where isDelete='0' and tb_order.order_status !='0';
     `;
   }else{ sql = `
       SELECT * FROM tb_order 
@@ -140,6 +140,12 @@ const createRecycleOrder = function (reqBody, userId) {
   return {sql1,sql2};
 }
 
+//商家发货订单
+const fahuo =function(reqBody){
+  const { orderId } = reqBody;
+  const sql = `UPDATE tb_order SET order_status='2' where order_id = '${orderId}'`
+  return sql;
+}
 //选择地址
 const selectAdress = function (reqBody) {
   const { orderId, addressId } = reqBody;
@@ -214,7 +220,7 @@ const getorderTotal = function () {
 //确认收货
 const checkOrder = function (reqBody) {
   const { orderId } = reqBody;
-  const sql = `UPDATE tb_order SET order_status='2' where order_id = '${orderId}'`
+  const sql = `UPDATE tb_order SET order_status='3' where order_id = '${orderId}'`
   return sql;
 }
 
@@ -335,6 +341,7 @@ module.exports = {
   selectAdress,
   submitOrder,
   getOrderList,
+  fahuo,
   checkOrder,
   createRecycleOrder,
   selectRecycleAddress,
