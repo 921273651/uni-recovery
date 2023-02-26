@@ -110,6 +110,7 @@ const getOrderList = function (reqBody, userId) {
   if(isAdmin) {
     sql = `
     SELECT * FROM tb_order
+    
     left JOIN tb_address ON tb_order.address_id = tb_address.address_id 
     inner JOIN tb_goods ON tb_order.good_id = tb_goods.id
    left JOIN tb_user ON tb_order.user_id = tb_user.userId;

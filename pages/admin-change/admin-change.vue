@@ -12,7 +12,7 @@
    				<uni-tr>
    					<uni-th width="50" align="center">订单编号</uni-th>
              <uni-th width="80" align="center">用户名</uni-th>
-   					<uni-th width="80" align="center">日期</uni-th>
+   					
    					<uni-th align="center">地址</uni-th>
              <uni-th width="100" align="center">订单内容</uni-th>
              <uni-th width="80" align="center">订单状态</uni-th>
@@ -23,20 +23,18 @@
              <uni-td>
              	<view class="username">{{ item.username }}</view>
              </uni-td>
-   					<uni-td>
-   						<view class="data">{{ item.data }}</view>
-   					</uni-td>
-             <uni-td align="center" class="address">{{ item.address }}</uni-td>
+   					
+             <uni-td align="center" class="address">{{ item.address_city + item.address_information }}</uni-td>
              <uni-td>
-             	<view  class="content">{{ item.content }}</view>
+             	<view  class="content">{{ item.cateName }}</view>
              </uni-td>
              <uni-td>
-             	<view class="status" >{{ item.status }}</view>
+             	<view class="status" >{{ statusToName[item.order_status] }}</view>
              </uni-td>
    					<uni-td>
    						<view class="uni-group">
    							<button class="uni-button" size="mini" type="primary">修改</button>
-   							<button class="uni-button" size="mini" type="warn">删除</button>
+   							<button class="uni-button" size="mini" type="warn" @click="deleteOrder(item.order_id)">删除</button>
    						</view>
    					</uni-td>
    				</uni-tr>
@@ -50,7 +48,13 @@
   export default {
     data() {
       return {
-        changeList:[],
+        changeList:[],  
+              statusToName: {
+              	'0': '待接收',
+              	'1': '待发货',
+              	'2': '已完成',
+              	
+              }
       };
     },
     onShow() {
@@ -68,7 +72,19 @@
           console.log('请求错误')
         }
       },
-    }
+      async deleteOrder(orderId){
+         const res = await this.$api.deleteOrder({orderId:orderId});
+         if (res) {
+         	uni.showToast({
+         		title: '删除成功！',
+         		icon: 'success',
+         		duration: 1000
+         	})
+         	this.getOrderList()
+         }
+       },
+    },
+    
   }
 </script>
 

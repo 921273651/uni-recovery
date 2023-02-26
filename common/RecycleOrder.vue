@@ -24,7 +24,7 @@
   				<p>地址：{{item.address_city || '待填写'}}{{item.address_information || ''}}</p>
   				<!-- <div class="list-box-bot"><p>花费积分：{{item.catePrice}}</p></div> -->
   				<div class="list-box-bot"><p>回收类型：{{item.order_type==='1'?'公益捐赠':'正常'}}</p><button v-if="item.order_status==='2'" @click.stop="checkRecycle(item.order_id)">确认回收</button>
-          <button v-else style="background-color: #ffca4c;color:white;">删除</button>
+          <button v-else style="background-color: #ffca4c;color:white;" @click.stop="deleteOrder(item.order_id)">删除</button>
           </div>
   			</view>
   		</uni-card>
@@ -78,6 +78,17 @@
   				url:`/pages/recycle/recycle?orderId=${orderId}&orderStatus=${orderStatus}`
   			})
   		},
+      async deleteOrder(orderId){
+         const res = await this.$api.deleteOrder({orderId:orderId});
+         if (res) {
+         	uni.showToast({
+         		title: '删除成功！',
+         		icon: 'success',
+         		duration: 1000
+         	})
+         	this.getOrderList()
+         }
+       },
   		// createRecycleOrder() {
   		// 	uni.showModal({
   		// 		title: '提示',
