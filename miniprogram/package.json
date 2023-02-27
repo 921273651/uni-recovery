@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "uview-ui": "^2.0.33",
+    "vant-weapp": "^0.5.29"
+  }
+}
