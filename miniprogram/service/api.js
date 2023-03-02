@@ -5,7 +5,6 @@ export default {
 	async getItemList() {
 		const res = await fetch.request({
 			url: 'item/getItemList',
-
 		});
 		if (res.code === '2000') {
       console.log(res.data,'分类列表接口返回值')
@@ -13,6 +12,29 @@ export default {
 		}
 		return [];
 	},
+  async getPoints() {
+    const res = await fetch.request({
+    	url: 'user/getPoints',
+    });
+    console.log('res22',res)
+    if (res.code === '2000') {
+    	return res.data;
+    }
+    return [];
+  },
+  //获取活动列表
+ async getActivityList(){
+   const res = await fetch.request({
+   	url: 'item/getActivityList',
+    method: 'POST',
+   });
+   if (res.code === '2000') {
+     // console.log(res.data,'活动列表')
+   	return res.data;
+   }
+   return [];
+ },
+  
 	//获取地址
 	async getAddressList(params) {
 		const res = await fetch.request({

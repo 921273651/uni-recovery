@@ -169,7 +169,7 @@ const submitOrder = function (reqBody) {
 
 //提交回收订单
 const submitRecycleOrder = function (reqBody) {
-  const { order_id, estimated_weight, call_date, call_time, remark, orderType } = reqBody;
+  const { order_id, estimated_weight, call_date, call_time, remark, orderType, points } = reqBody;
   const sql = 
   `UPDATE 
     tb_recycle_order 
@@ -179,8 +179,17 @@ const submitRecycleOrder = function (reqBody) {
     call_date='${call_date}',
     call_time='${call_time}',
     remark='${remark}',
-    order_type='${orderType}'
+    order_type='${orderType}',
+    points='${points}'
     where order_id = '${order_id}'`
+  return sql;
+}
+
+//获取积分
+const getPoints = (reqBody, userId) => {
+  const sql = `
+    select SUM(points) as myPoint from tb_recycle_order;
+  `
   return sql;
 }
 
@@ -323,8 +332,17 @@ const getInformation = function (reqBody) {
 //   }
 //   return sql;
 // }
+//获取活动列表
 
-
+const getActivityList = function (reqBody) {
+  const sql = `
+        select
+            *
+        from
+            tb_activity 
+        `;
+  return sql;
+}
 
 module.exports = {
   Query,
@@ -350,5 +368,7 @@ module.exports = {
   checkRecycle,
   getorderTotal,
   againOrder,
-  deleteOrder
+  deleteOrder,
+  getPoints,
+  getActivityList,
 }

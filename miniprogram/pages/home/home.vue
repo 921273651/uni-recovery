@@ -52,7 +52,7 @@
     </view>
   </uni-col>
   <uni-col :span="12">
-  	<view class="demo-uni-col light" style="background: url(http://39.107.241.37:2020/static/images/avatar/activity.jpg); background-size:contain;">
+  	<view class="demo-uni-col light" style="background: url(http://39.107.241.37:2020/static/images/avatar/activity.jpg); background-size:contain;" @click="goactivity">
       <text>活动中心</text>
     </view>
   </uni-col>
@@ -111,6 +111,11 @@
       goVideo(){
         uni.navigateTo({
           url: '/pages/video/video'
+        }) 
+      },
+      goactivity(){
+        uni.navigateTo({
+          url: '/pages/activity/activity'
         }) 
       }
     }

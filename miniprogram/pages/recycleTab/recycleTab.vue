@@ -92,7 +92,7 @@
   	<!-- 按钮开始 -->
   	<view class="button-group" v-if="orderStatus==='0'">
   		<button type="primary" plain="true" @click="submit(1)">公益捐赠
-      <p> 预计获得积分：{{}}</p>
+      <p> 预计获得积分：{{pointSum}}</p>
       </button>
   		<button type="primary" plain="true" @click="submit(2)">确定下单</button>
   	</view>
@@ -127,6 +127,11 @@
     		],
     		isEdit: false
     	}
+    },
+    computed:{
+      pointSum() {
+        return this.weightList.reduce((a,b)=>Number(a)+Number(b),0);
+      }
     },
     async onShow() {
       this.isLoading = true;
@@ -216,7 +221,12 @@
     	async submit(type) {
     		this.formdata.estimated_weight = this.weightList.join(',');
     		const res = await this.$api.submitRecycleOrder({
-    			...this.formdata,
+    			order_id: this.formdata.order_id,
+    			estimated_weight: this.formdata.estimated_weight,
+    			call_date: this.formdata.call_date,
+    			call_time: this.formdata.call_time,
+    			remark: this.formdata.remark,
+          points: this.pointSum,
     			orderType: type
     		});
     		uni.showToast({

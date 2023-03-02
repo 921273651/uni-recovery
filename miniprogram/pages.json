@@ -173,6 +173,15 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+        {
+            "path" : "common/activity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 

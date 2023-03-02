@@ -1,18 +1,6 @@
 <template>
   <view class="order-page">
-  	<!-- <view class="nav-box">
-  		<view class="nav">
-  			<view class="item">
-  				<view>全部</view>
-  			</view>
-  			<view class="item">
-  				<view>待服务</view>
-  			</view>
-  			<view class="item">
-  				<view>已完成</view>
-  			</view>
-  		</view>
-  	</view> -->
+  	
   	<view class="list">
   		<uni-card v-for="(item, index) in orderList" :key="item.order_id" :title="`订单编号 ${item.order_id}`" :extra="item.order_status==='0'?'订单待确认':item.order_status==='1'?'待发货':item.order_status==='2'?'送货上门中':'已收货'" @click="gotoDetail(item.order_id,item.order_status,item.address_id)">
   			<view class="uni-body">

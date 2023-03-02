@@ -60,5 +60,22 @@ router.post('/manage', (req, res) => {
     res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
   })
 });
+
+  //获取订单列表
+  router.get('/getPoints', (req, res) => {
+    const userId = req.header('token');
+    let sql = db.getPoints(req.query, userId);
+    console.log('sql', sql);
+    db.Query(sql).then(async(data) => {
+      if (data) {
+        res.send({ "code": "2000", "message": "获取成功！", "data": data[0] });
+      } else {
+        res.send({ "code": "401", "error": "获取失败" });
+      }
+    }, err => {
+      res.send({ "code": "401", "error": "获取失败" });
+    })
+  })
+
 console.log('login接口就绪');
 module.exports = router;
