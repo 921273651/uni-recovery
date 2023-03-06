@@ -66,7 +66,7 @@ Tomcat 7.0.76
 
 - 配置nginx
 
-![image-20230214111752069](C:\Users\sinwen\Desktop\milk\uni-recovery\image-20230214111752069.png)
+![image-20230214111752069](https://github.com/921273651/uni-recovery/blob/sin-dev/image-20230214111752069.png)
 
 ```
 listen 2020; //页面的端口
@@ -77,11 +77,11 @@ root  /www/server/tomcat/webapps/dist; //项目地址
 
 - 放置图片
 
-![image-20230214112133800](C:\Users\sinwen\Desktop\milk\uni-recovery\image-20230214112133800.png)
+![image-20230214112133800](https://github.com/921273651/uni-recovery/blob/sin-dev/image-20230214112133800.png)
 
 - 效果
 
-![image-20230214112239163](C:\Users\sinwen\Desktop\milk\uni-recovery\image-20230214112239163.png)
+![image-20230214112239163](https://github.com/921273651/uni-recovery/blob/sin-dev/image-20230214112239163.png)
 
 **安装node并持续运行后台服务**
 
@@ -168,9 +168,9 @@ $ exit
 
 添加到数据库
 
-![image-20230214114940488](C:\Users\sinwen\Desktop\milk\uni-recovery\image-20230214114940488.png)
+![image-20230214114940488](https://github.com/921273651/uni-recovery/blob/sin-dev/image-20230214114940488.png)
 
 测试后台是否连通数据库
 
-![image-20230214115131613](C:\Users\sinwen\Desktop\milk\uni-recovery\image-20230214115131613.png)
+![image-20230214115131613](https://github.com/921273651/uni-recovery/blob/sin-dev/image-20230214115131613.png)
 
