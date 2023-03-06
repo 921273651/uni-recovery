@@ -9,7 +9,7 @@
       <view class="user-info" v-else>
         <!-- 用户头像 -->
         <view class="avatar">
-          <image :src="userInfo.imgSrc" class="avatorImage"></image>
+          <image @click="chooseImage" :src="userInfo.imgSrc ? `http://localhost:8000/images/${userInfo.imgSrc}` : 'http://localhost:8000/images/headerImage.png'" class="avatorImage"></image>
         </view>
         <!-- 用户名称 -->
         <view class="username">
@@ -60,6 +60,30 @@
 			uni.reLaunch({
 				url: '/pages/mine/mine'
 			}) 
+		},
+		chooseImage() {
+			uni.chooseImage({
+				success: (chooseImageRes) => {
+					const tempFilePaths = chooseImageRes.tempFilePaths;
+					console.log('tem', tempFilePaths)
+					uni.uploadFile({
+						url: 'http://localhost:8000/api/user/upload', //仅为示例，非真实的接口地址
+						header: {
+							token: uni.getStorageSync('userInfo').userId,
+						},
+						filePath: tempFilePaths[0],
+						name: 'file',
+						formData: {
+							'user': 'test'
+						},
+						success: (uploadFileRes) => {
+							console.log('uploadFileRes.data',JSON.parse(uploadFileRes.data).data);
+							this.userInfo.imgSrc = JSON.parse(uploadFileRes.data).data;
+							uni.setStorageSync('userInfo', this.userInfo)
+						}
+					});
+				}
+			});
 		}
   },
   }
@@ -91,7 +115,6 @@
 	.avatorImage {
 		width: 150rpx;
 		height: 150rpx;
-		border: 1px solid tomato;
 	}
   }
 

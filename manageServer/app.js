@@ -1,3 +1,7 @@
+
+
+
+
 // 引入express
 let express = require('express');
 //引入处理解析中间体模块
@@ -6,6 +10,8 @@ let bodyParser = require('body-parser');
 let cors = require('cors');
 //引入express-jwt用来解决token的验证问题,express-jwt和jwt都要引入(jwt的加密解密方法在util里面),两者解决的问题不同（jwt用来加密，express-jwt用来验证）。
 let expressJWT = require('express-jwt');
+
+let path = require('path');
 
 //引入路径
 let loginRouter = require('./routes/login');
@@ -22,6 +28,7 @@ let app = express();
 app.listen(8000);
 console.log('后端服务已开启,现在监听8808端口...')
 //使用所需中间件
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

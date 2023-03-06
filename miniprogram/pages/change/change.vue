@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <uni-card title="用户名" :extra="`当前积分为${myPoint}`" :thumbnail="avatar" @click="onClick">
+    <uni-card title="用户名" :extra="`当前积分为${myPoint}`" :thumbnail="`http://localhost:8000/images/${avatar}`" @click="onClick">
 <!-- 10.11 -->
 
     </uni-card>
@@ -36,11 +36,14 @@
     data() {
       return {
         myPoint: 0,
-        avatar: 'https://tse4-mm.cn.bing.net/th/id/OIP-C.VWRK3D4CN_uVkIhEsttI8wHaF2?w=246&h=194&c=7&r=0&o=5&dpr=1.88&pid=1.7',
+        avatar: uni.getStorageSync('userInfo') && uni.getStorageSync('userInfo').imgSrc,
         itemList:[],
         orderList:[],
       }
     },
+		onShow() {
+			this.avatar = uni.getStorageSync('userInfo') && uni.getStorageSync('userInfo').imgSrc;
+		},
     onLoad() {
      this.getPoints();
      this.getitemList();//获取商品列表

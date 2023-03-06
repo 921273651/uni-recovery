@@ -1,6 +1,37 @@
 const express = require('express');
+const path = require('path');
+const multer = require('multer');
+const fs = require('fs');
 const router = express.Router();
 const db = require('../db.js');
+
+const upload = multer({dest:'tmp/'});
+
+router.post('/upload', upload.single('file'),(req,res)=>{
+  const userId = req.header('token');
+  const imgFile = req.file;
+  const tmp = imgFile.path;
+  const ext = path.extname(imgFile.originalname);
+  const newName = "" + (new Date().getTime()) + Math.round(Math.random()*10000) + ext;
+  const newPath = "../public/images/" + newName;
+  const fileData = fs.readFileSync(tmp);
+  fs.writeFileSync(path.join(__dirname,newPath),fileData);
+
+  let sql = db.upload(userId, newName);
+  console.log('sql',sql)
+  db.Query(sql).then(data => {
+    console.log('data',data);
+    if (data) {
+      res.send({ "code": "2000", "data": newName, "message": "写入图片成功！" });
+    } else {
+      res.send({ "code": "400", "message": "写入图片错误！" });
+    }
+  }, err => {
+    console.log('err', err);
+    res.send({ "code": "500", "message": '服务器异常，请刷新或重试！' });
+  })
+})
+
 
 // 登录
 router.post('/login', (req, res) => {
