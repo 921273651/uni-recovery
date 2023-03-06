@@ -1,6 +1,6 @@
 <template>
 	<!-- 地址管理 -->
-	<view class="page_myAddress">
+	<view class="page_myAddress" >
 		<!-- 地址列表开始 -->
 		<view class="path_list">
 			<view class='path_item' v-for="(item,index) in addressList " :key='index'
@@ -84,6 +84,11 @@
 </script>
 
 <style lang="scss">
+  body{
+    background: url(http://39.107.241.37:2020/static/images/bg/green1.jpg);
+    background-size:cover; 
+    
+  }
 	.add_path {
 		padding: 30rpx 20rpx;
 		width: 100%;
@@ -91,8 +96,8 @@
 		justify-content: center;
 
 		.add_path_btn {
-			border: 2px solid #49BDFB;
-			color: #49BDFB;
+			border: 2px solid #DAA520;
+			color: #DAA520;
 			font-size: 16px;
 			border-radius: 30rpx;
 			padding: 6rpx 60rpx;
@@ -105,7 +110,7 @@
 		.path_item {
 			font-size: 14px;
 			padding: 10rpx;
-			border-bottom: 2rpx solid #CCCCCC;
+			border-bottom: 2rpx solid #DAA520;
 		}
 
 		.item_main {

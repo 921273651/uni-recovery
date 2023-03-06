@@ -41,7 +41,7 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
         address_name: '', 
         address_phoneNumber: '', 
         address_city: '', 
-        address_information: '2', 
+        address_information: '', 
         address_default: 0,
 		orderId:''
       };
@@ -101,6 +101,10 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
 </script>
 
 <style lang="scss">
+  body{
+    background: url(http://39.107.241.37:2020/static/images/bg/green1.jpg);
+    background-size:cover; 
+  }
 .page_addPath{
   font-size: 14px;
   padding-left:20rpx ;
@@ -124,8 +128,8 @@ import mpvueCityPicker from'../../components/mpvue-citypicker/mpvueCityPicker.vu
     display: flex;
     justify-content: center;
     .add_path_btn{
-      border:2px solid #49BDFB;
-      color:#49BDFB;
+      border:2px solid #DAA520;
+      color:#DAA520;
       font-size: 16px;
       border-radius: 30rpx;
       padding: 6rpx 60rpx;

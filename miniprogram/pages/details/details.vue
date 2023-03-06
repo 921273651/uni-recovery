@@ -17,30 +17,24 @@
 
       </image>
     </view>
-     
-
-		
-    
     <!-- 积分与名称开始  -->
     <view class="details-goods">
-      <view class="goods_name"></view>
-      <view class="goods_points">
-        100积分
+      <view class="center">
+        <view class="goods_name">我是耳机我是耳机我是耳机我十二集</view>
+        <view class="goods_points">
+          100积分
+        </view>
       </view>
+
       <view class="goods_content">精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩</view>
       <!-- 详情开始 -->
       <view>
-        <view>
-          <image class="detail-image" src="http://39.107.241.37:2020/static/images/home/goods/1.png" mode=""></image>
-      
-      
-        </view>
       </view>
       <!-- 详情结束 -->
     </view>
     <!-- 积分与名称结束 -->
 
-    
+
 
     <Card cardTitle='推荐活动'></Card>
     <CateList :CatesList="CatesList"></CateList>
@@ -117,25 +111,41 @@
 </script>
 
 <style lang="scss">
-  
-.detail{
-width: 100%;
-height:200px;
-// border-radius: 10px;
+  .page-details {
+    width: 100%;
+    height: 1000vh;
+    overflow: hidden;
+  }
+.top{
+  height:200 vh;
+  display: flex;
 }
+  .detail {
+    width: 100%;
+    height: 200px;
+    // border-radius: 10px;
+  }
+
   .wx-nav {
     height: 60px;
   }
 
   .details-goods {
-display: flex;
-left:0;
-margin-bottom: 50px;
+
+    display: flex;
+    left: 0;
+    margin-top: -40px;
     text-align: center;
     font-weight: bold;
     font-size: 16px;
     padding: 10rpx 0;
-
+    background: #FFFFFF;
+    border-radius: 10px;
+    height: 300px;
+    
+.center{
+  
+}
     .goods_content {
       font-size: 12px;
     }
