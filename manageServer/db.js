@@ -240,6 +240,11 @@ const checkRecycle = function (reqBody) {
   return sql;
 }
 
+const upload = function (userId, newName) {
+  const sql = `UPDATE tb_user SET imgSrc='${newName}' where userId = '${userId}'`
+  return sql;
+}
+
 // 接受回收订单
 const againOrder = function (reqBody) {
   const { order_id } = reqBody;
@@ -371,4 +376,5 @@ module.exports = {
   deleteOrder,
   getPoints,
   getActivityList,
+  upload
 }
