@@ -1,14 +1,14 @@
 <template>
   <view class="cate-box" >
     <!-- 单个商品组件 -->
-    <view class="cates-item" v-for="(item,index) in catesList" :key='index'>
-      <image  class="cates-img" :src="item.imgUrl"  mode=""></image>
+    <view class="cates-item" v-for="(item,index) in itemList" :key="item.id"  :data-itemid="(item.id)">
+      <image  class="cates-img" :src="item.cateUrl"  mode=""></image>
       <view class="cates-content">
         <text class="cates-name">
-          {{item.name}}
+          {{item.cateName}}
         </text>
         <view >
-          <text class="cates-price" >{{item.price}}</text>
+          <text class="cates-price" >{{item.catePrice}}</text>
         </view>
       </view>
     </view>
@@ -16,12 +16,25 @@
 </template>
 
 <script>
-  import CateList from './CateList.vue'
+  
   export default{
+    data(){
+      return{
+         itemList:[]
+      }
+    },
+   onLoad() {
+   
+    this.getitemList();//获取商品列表
+    // this.getOrderList()
+     },
     
-    props:{
-      catesList:Array
-    }
+    methods:{
+      async getitemList(){
+          this.itemList = await this.$api.getCatesList({cateType: 'goods'});
+          
+        },
+    },
   }
 </script>
 

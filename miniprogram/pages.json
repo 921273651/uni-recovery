@@ -183,6 +183,15 @@
             }
             
         }
+        ,{
+            "path" : "common/recommand",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 
 	"tabBar": {

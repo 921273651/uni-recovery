@@ -11,22 +11,22 @@
     <!-- 顶部结束 -->
 
     <!-- 轮播开始 -->
-    <view class="top">
+    <view class="top" >
       <!-- 调用getgoodslist 拿到当前点击商品id下的所有数据，选择图片数据，在data中，src中写data中列表的名字 -->
-      <image class="detail" :src="src">
+      <image class="detail" :src="`{{CatesList[0].cateUrl}}`">
 
       </image>
     </view>
     <!-- 积分与名称开始  -->
     <view class="details-goods">
       <view class="center">
-        <view class="goods_name">我是耳机我是耳机我是耳机我十二集</view>
+        <view class="goods_name">{{CatesList[0].cateName}}</view>
         <view class="goods_points">
-          100积分
+         {{CatesList[0].catePrice}}
         </view>
       </view>
 
-      <view class="goods_content">精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩精品定制口罩</view>
+      <view class="goods_content">{{CatesList[0].cateContent}}</view>
       <!-- 详情开始 -->
       <view>
       </view>
@@ -35,9 +35,11 @@
     <!-- 积分与名称结束 -->
 
 
-
-    <Card cardTitle='推荐活动'></Card>
-    <CateList :CatesList="CatesList"></CateList>
+<view class="bottom">
+  <Card cardTitle='推荐活动'></Card>
+  <Cates ></Cates>
+</view>
+   
     <!-- 底部导航开始 -->
     <view class="bottom-nav">
       <button class="add-cart" @click="btnBuy()">
@@ -50,13 +52,14 @@
 </template>
 
 <script>
-  import Card from '@/common/Card.vue'
-  import CateList from '@/common/CateList.vue'
+   import Card from '@/common/Card.vue'
+  import Cates from '@/common/Cates.vue'
+  
   export default {
     data() {
       return {
         goodsId: '',
-        src: 'http://39.107.241.37:2020/static/images/home/goods/1.png',
+        src: '',
         CatesList: [
 
         ]
@@ -72,7 +75,9 @@
         this.CatesList = await this.$api.getCatesList({
           cateType: 'goods',
           goodId: this.goodsId,
+           
         });
+       
       },
       //查找当前id的商品所有信息
 
@@ -105,24 +110,29 @@
     // 引入自定义组件需在components底下加入
     components: {
       Card,
-      CateList
+      Cates
+     
     }
   }
 </script>
 
 <style lang="scss">
   .page-details {
+    position: relative;
     width: 100%;
-    height: 1000vh;
+    // height: 1000vh;
     overflow: hidden;
   }
 .top{
-  height:200 vh;
-  display: flex;
+  // position: absolute;
+  z-index: 1;
+  height:40vh;
+  // display: flex;
 }
   .detail {
     width: 100%;
-    height: 200px;
+    height: 40vh;
+    z-index:1;
     // border-radius: 10px;
   }
 
@@ -131,16 +141,17 @@
   }
 
   .details-goods {
-
-    display: flex;
+    // z-index:1;
+    margin-top: -5vh;
+    position: absolute;
     left: 0;
-    margin-top: -40px;
+   // margin:0px 10px 0px 10px;
     text-align: center;
     font-weight: bold;
     font-size: 16px;
     padding: 10rpx 0;
     background: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 20px;
     height: 300px;
     
 .center{
@@ -150,7 +161,9 @@
       font-size: 12px;
     }
   }
-
+.bottom{
+  margin-top: 15vh;
+}
   .bottom-nav {
     height: 100rpx;
     background: #fff;
@@ -161,9 +174,10 @@
     bottom: 0;
 
   }
-
+  
   // flex等比例缩放
   .bottom-nav .add-cart {
+    // position: absolute;
     flex: 1;
     text-align: center;
     line-height: 100rpx;
